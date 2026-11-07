@@ -1,0 +1,117 @@
+/* Editor chrome that has to reach BlockNote's own DOM.
+   Scoped to the classes we add, so nothing here can leak onto the site. */
+
+/* ── Row Layout columns ───────────────────────────────────────────────────
+   A nested editor inherits BlockNote's 54px side padding, which is right for a
+   page canvas and far too wide for a column. Everything below trims the nested
+   instance back to something column-sized without touching the outer one. */
+
+.bms-col-canvas .bn-editor {
+  padding-inline: 26px;
+  padding-block: 4px;
+}
+
+.bms-col-canvas .bn-container {
+  background: transparent;
+}
+
+/* Columns carry the same default inset as the published page (see blockCss).
+   The nested editor already trims its own side padding below, so this is what
+   actually keeps content off the column edge in the canvas. */
+.bms-col {
+  padding-inline: 14px;
+  padding-block: 10px;
+}
+
+/* A Section's background is painted on the column wrapper, and BlockNote's own
+   canvas sits on top of it — `.bn-editor` carries an opaque
+   `--bn-colors-editor-background: #ffffff`. Left alone, a coloured column shows
+   its colour only in the sliver below the editor, which is nothing like the
+   published page. Both layers have to be transparent for the Section to read
+   the way it will once rendered. */
+.bms-col-canvas .bn-editor,
+.bms-col-canvas .bn-root {
+  background-color: transparent;
+}
+
+/* The column canvas must fill its Section rather than sit at content height,
+   or a colour stops at the last line of text instead of covering the column. */
+.bms-col-canvas {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.bms-col-canvas > .bn-container {
+  flex: 1 1 auto;
+}
+
+/* Custom blocks must fill the width of whatever holds them.
+   BlockNote makes a block's content box a flex container whenever the block has
+   no inline content — `.bn-block-content:not(:has(.bn-inline-content))` — which
+   is every custom block we define. Our block wrapper then becomes a flex item
+   and shrink-wraps its content, so the hover and selection outline hugs the
+   text instead of running to the edge of the column, and any inner
+   `justify-content` (the Button block's Alignment) has no room to do anything.
+   Stretching the wrapper fixes both, and matches how the block renders on the
+   published page, where it is an ordinary block-level element. */
+.bn-block-content > .bms-block,
+.bn-block-content > .bms-row {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Drag handle + add button sit in the left gutter; keep them reachable. */
+.bms-col-canvas .bn-block-outer {
+  overflow: visible;
+}
+
+/* Tighter rhythm inside a column than on the page canvas. */
+.bms-col-canvas .bn-block-content {
+  padding-block: 1px;
+}
+
+/* A row is a widget as far as the page editor is concerned — the nested
+   editors own their own carets, so the outer one must not paint a selection
+   over the whole row. */
+.bms-row .bn-block-content[data-is-empty-and-focused]::before {
+  opacity: 0.55;
+}
+
+.bms-row ::selection {
+  background: rgb(186 230 253 / 0.75);
+}
+
+/* The appender bar under a column only shows on row hover or focus, and must
+   not add height when hidden. */
+.bms-col-canvas .bms-appender {
+  line-height: 0;
+}
+
+/* An untouched column is drawn as a centred "+" and nothing else, so it needs
+   room for the button and must not show BlockNote's caret placeholder
+   underneath it — two prompts in one empty box read as a rendering fault. */
+.bms-col-empty {
+  min-height: 58px;
+}
+
+.bms-col-empty .bn-inline-content::before {
+  content: none !important;
+}
+
+/* Heading blocks at the sizes the page renders them (text-4xl / 2xl / xl with
+   the same margins), so a heading is not one size while editing and another
+   once published. BlockNote sizes headings through --level; the margins land
+   on the tag itself so the block's own padding is untouched. */
+.bms-canvas .bn-block-content[data-content-type="heading"] { --level: 2.25rem; }
+.bms-canvas .bn-block-content[data-content-type="heading"][data-level="2"] { --level: 1.5rem; }
+.bms-canvas .bn-block-content[data-content-type="heading"][data-level="3"] { --level: 1.25rem; }
+.bms-canvas .bn-block-content[data-content-type="heading"] h1 { line-height: 2.5rem; font-weight: 700; margin: 2rem 0 1rem; }
+.bms-canvas .bn-block-content[data-content-type="heading"] h2 { line-height: 2rem; font-weight: 700; margin: 1.5rem 0 0.75rem; }
+.bms-canvas .bn-block-content[data-content-type="heading"] h3 { line-height: 1.75rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+
+/* Paragraphs likewise: the page renders `mb-4 leading-relaxed`, and without
+   this the canvas stacked them flush with a tighter line height, so a body of
+   text read as one block while editing and as separate paragraphs once live. */
+.bms-canvas .bn-block-content[data-content-type="paragraph"] > p { line-height: 1.625; margin: 0 0 1rem; }

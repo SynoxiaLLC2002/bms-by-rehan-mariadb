@@ -1,0 +1,4037 @@
+{
+ "generatedFrom": [
+  "src/components/editor/customBlocks.tsx",
+  "src/components/editor/RowLayoutBlock.tsx",
+  "src/lib/blockLibrary.ts"
+ ],
+ "blockCount": 69,
+ "blocks": {
+  "paragraph": {
+   "label": "Paragraph",
+   "hint": "Plain body text",
+   "category": "text",
+   "insertable": true,
+   "content": "inline",
+   "props": {
+    "textColor": {
+     "default": "default"
+    },
+    "backgroundColor": {
+     "default": "default"
+    },
+    "textAlignment": {
+     "default": "left",
+     "values": [
+      "left",
+      "center",
+      "right",
+      "justify"
+     ]
+    }
+   }
+  },
+  "heading": {
+   "label": "Heading 1",
+   "hint": "Large section heading",
+   "category": "text",
+   "insertable": true,
+   "content": "inline",
+   "props": {
+    "level": {
+     "default": 1,
+     "values": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    "textColor": {
+     "default": "default"
+    },
+    "backgroundColor": {
+     "default": "default"
+    },
+    "textAlignment": {
+     "default": "left"
+    }
+   },
+   "presets": [
+    {
+     "label": "Heading 1",
+     "props": {
+      "level": 1
+     }
+    },
+    {
+     "label": "Heading 2",
+     "props": {
+      "level": 2
+     }
+    },
+    {
+     "label": "Heading 3",
+     "props": {
+      "level": 3
+     }
+    }
+   ]
+  },
+  "bulletListItem": {
+   "label": "Bulleted List",
+   "hint": "An unordered list",
+   "category": "text",
+   "insertable": true,
+   "content": "inline",
+   "props": {
+    "textColor": {
+     "default": "default"
+    },
+    "backgroundColor": {
+     "default": "default"
+    },
+    "textAlignment": {
+     "default": "left"
+    }
+   }
+  },
+  "numberedListItem": {
+   "label": "Numbered List",
+   "hint": "An ordered list",
+   "category": "text",
+   "insertable": true,
+   "content": "inline",
+   "props": {
+    "textColor": {
+     "default": "default"
+    },
+    "backgroundColor": {
+     "default": "default"
+    },
+    "textAlignment": {
+     "default": "left"
+    }
+   }
+  },
+  "checkListItem": {
+   "label": "Check List",
+   "hint": "A list with checkboxes",
+   "category": "text",
+   "insertable": true,
+   "content": "inline",
+   "props": {
+    "checked": {
+     "default": false
+    },
+    "textColor": {
+     "default": "default"
+    },
+    "backgroundColor": {
+     "default": "default"
+    },
+    "textAlignment": {
+     "default": "left"
+    }
+   }
+  },
+  "quote": {
+   "label": "Quote",
+   "hint": "A pull quote",
+   "category": "text",
+   "insertable": true,
+   "content": "inline",
+   "props": {
+    "textColor": {
+     "default": "default"
+    },
+    "backgroundColor": {
+     "default": "default"
+    }
+   }
+  },
+  "codeBlock": {
+   "label": "Code",
+   "hint": "Preformatted code",
+   "category": "text",
+   "insertable": true,
+   "content": "inline",
+   "props": {
+    "language": {
+     "default": "text"
+    }
+   }
+  },
+  "table": {
+   "label": "Table",
+   "hint": "Rows and columns",
+   "category": "text",
+   "insertable": true,
+   "content": "table",
+   "props": {
+    "textColor": {
+     "default": "default"
+    }
+   }
+  },
+  "image": {
+   "label": "Image",
+   "hint": "A single image",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "url": {
+     "default": ""
+    },
+    "caption": {
+     "default": ""
+    },
+    "name": {
+     "default": ""
+    },
+    "previewWidth": {
+     "default": null
+    },
+    "textAlignment": {
+     "default": "left"
+    },
+    "showPreview": {
+     "default": true
+    }
+   }
+  },
+  "video": {
+   "label": "Video",
+   "hint": "An uploaded video file",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "url": {
+     "default": ""
+    },
+    "caption": {
+     "default": ""
+    },
+    "name": {
+     "default": ""
+    },
+    "previewWidth": {
+     "default": null
+    },
+    "textAlignment": {
+     "default": "left"
+    },
+    "showPreview": {
+     "default": true
+    }
+   }
+  },
+  "audio": {
+   "label": "Audio",
+   "hint": "An audio file",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "url": {
+     "default": ""
+    },
+    "caption": {
+     "default": ""
+    },
+    "name": {
+     "default": ""
+    },
+    "showPreview": {
+     "default": true
+    }
+   }
+  },
+  "button": {
+   "label": "Button",
+   "hint": "One or more call-to-action buttons",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "btns": {
+     "default": ""
+    },
+    "align": {
+     "default": "left"
+    },
+    "alignT": {
+     "default": ""
+    },
+    "alignM": {
+     "default": ""
+    },
+    "gap": {
+     "default": ""
+    },
+    "stack": {
+     "default": ""
+    },
+    "text": {
+     "default": "Click me"
+    },
+    "url": {
+     "default": "#"
+    },
+    "style": {
+     "default": "primary"
+    },
+    "target": {
+     "default": "_self"
+    }
+   }
+  },
+  "spacer": {
+   "label": "Spacer",
+   "hint": "Vertical space or a rule",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "height": {
+     "default": "40"
+    },
+    "showDivider": {
+     "default": "false"
+    },
+    "dividerStyle": {
+     "default": "solid"
+    },
+    "dividerColor": {
+     "default": "#e2e8f0"
+    }
+   }
+  },
+  "infoBox": {
+   "label": "Info Box",
+   "hint": "Icon, title and description card",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "icon": {
+     "default": "ℹ"
+    },
+    "title": {
+     "default": "Info Box Title"
+    },
+    "text": {
+     "default": ""
+    },
+    "variant": {
+     "default": "info"
+    },
+    "preset": {
+     "default": ""
+    },
+    "textAlign": {
+     "default": ""
+    },
+    "mediaAlign": {
+     "default": "top"
+    },
+    "mediaVAlign": {
+     "default": "top"
+    },
+    "link": {
+     "default": ""
+    },
+    "linkTarget": {
+     "default": "_self"
+    },
+    "linkRel": {
+     "default": ""
+    },
+    "linkTitle": {
+     "default": ""
+    },
+    "linkContent": {
+     "default": "box"
+    },
+    "bgType": {
+     "default": "color"
+    },
+    "bg": {
+     "default": ""
+    },
+    "bgGradFrom": {
+     "default": ""
+    },
+    "bgGradTo": {
+     "default": ""
+    },
+    "bgGradType": {
+     "default": "linear"
+    },
+    "bgGradAngle": {
+     "default": ""
+    },
+    "hBgType": {
+     "default": "color"
+    },
+    "hBg": {
+     "default": ""
+    },
+    "hBgGradFrom": {
+     "default": ""
+    },
+    "hBgGradTo": {
+     "default": ""
+    },
+    "hBgGradType": {
+     "default": "linear"
+    },
+    "hBgGradAngle": {
+     "default": ""
+    },
+    "bd": {
+     "default": ""
+    },
+    "bdColor": {
+     "default": ""
+    },
+    "bdStyle": {
+     "default": "solid"
+    },
+    "hBd": {
+     "default": ""
+    },
+    "hBdColor": {
+     "default": ""
+    },
+    "rad": {
+     "default": ""
+    },
+    "hRad": {
+     "default": ""
+    },
+    "contPad": {
+     "default": ""
+    },
+    "shadow": {
+     "default": ""
+    },
+    "shColor": {
+     "default": ""
+    },
+    "shX": {
+     "default": ""
+    },
+    "shY": {
+     "default": ""
+    },
+    "shBlur": {
+     "default": ""
+    },
+    "shSpread": {
+     "default": ""
+    },
+    "hShadow": {
+     "default": ""
+    },
+    "hShadowOff": {
+     "default": ""
+    },
+    "hShColor": {
+     "default": ""
+    },
+    "hShX": {
+     "default": ""
+    },
+    "hShY": {
+     "default": ""
+    },
+    "hShBlur": {
+     "default": ""
+    },
+    "hShSpread": {
+     "default": ""
+    },
+    "mediaType": {
+     "default": "icon"
+    },
+    "iconSize": {
+     "default": ""
+    },
+    "iconBorder": {
+     "default": ""
+    },
+    "iconRadius": {
+     "default": ""
+    },
+    "iconPad": {
+     "default": ""
+    },
+    "iconAnim": {
+     "default": ""
+    },
+    "iconColor": {
+     "default": ""
+    },
+    "iconBg": {
+     "default": ""
+    },
+    "iconBorderColor": {
+     "default": ""
+    },
+    "hIconColor": {
+     "default": ""
+    },
+    "hIconBg": {
+     "default": ""
+    },
+    "hIconBorderColor": {
+     "default": ""
+    },
+    "iconTitle": {
+     "default": ""
+    },
+    "mediaPad": {
+     "default": ""
+    },
+    "mediaMar": {
+     "default": ""
+    },
+    "image": {
+     "default": ""
+    },
+    "imageAlt": {
+     "default": ""
+    },
+    "imageW": {
+     "default": ""
+    },
+    "number": {
+     "default": ""
+    },
+    "showTitle": {
+     "default": "1"
+    },
+    "titleTag": {
+     "default": "h3"
+    },
+    "titleColor": {
+     "default": ""
+    },
+    "hTitleColor": {
+     "default": ""
+    },
+    "titleFs": {
+     "default": ""
+    },
+    "titleLh": {
+     "default": ""
+    },
+    "titleLs": {
+     "default": ""
+    },
+    "titleFf": {
+     "default": ""
+    },
+    "titleFw": {
+     "default": ""
+    },
+    "titleTt": {
+     "default": ""
+    },
+    "titlePad": {
+     "default": ""
+    },
+    "titleMar": {
+     "default": ""
+    },
+    "titleMinH": {
+     "default": ""
+    },
+    "showText": {
+     "default": "1"
+    },
+    "textColor": {
+     "default": ""
+    },
+    "hTextColor": {
+     "default": ""
+    },
+    "textFs": {
+     "default": ""
+    },
+    "textLh": {
+     "default": ""
+    },
+    "textLs": {
+     "default": ""
+    },
+    "textFf": {
+     "default": ""
+    },
+    "textFw": {
+     "default": ""
+    },
+    "textTt": {
+     "default": ""
+    },
+    "textPad": {
+     "default": ""
+    },
+    "textMar": {
+     "default": ""
+    },
+    "textMinH": {
+     "default": ""
+    },
+    "showLearn": {
+     "default": ""
+    },
+    "learnMore": {
+     "default": "Learn More"
+    },
+    "learnIcon": {
+     "default": ""
+    },
+    "learnIconSide": {
+     "default": "right"
+    },
+    "learnColor": {
+     "default": ""
+    },
+    "hLearnColor": {
+     "default": ""
+    },
+    "learnBg": {
+     "default": ""
+    },
+    "hLearnBg": {
+     "default": ""
+    },
+    "learnBd": {
+     "default": ""
+    },
+    "learnBdColor": {
+     "default": ""
+    },
+    "hLearnBdColor": {
+     "default": ""
+    },
+    "learnRad": {
+     "default": ""
+    },
+    "learnPad": {
+     "default": ""
+    },
+    "learnMar": {
+     "default": ""
+    },
+    "learnFs": {
+     "default": ""
+    },
+    "learnLh": {
+     "default": ""
+    },
+    "learnLs": {
+     "default": ""
+    },
+    "learnFf": {
+     "default": ""
+    },
+    "learnFw": {
+     "default": ""
+    },
+    "learnTt": {
+     "default": ""
+    },
+    "maxWidth": {
+     "default": ""
+    },
+    "fullHeight": {
+     "default": ""
+    },
+    "anchor": {
+     "default": ""
+    },
+    "cssClass": {
+     "default": ""
+    },
+    "customCss": {
+     "default": ""
+    }
+   }
+  },
+  "progressBar": {
+   "label": "Progress Bar",
+   "hint": "A skill or progress meter",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "label": {
+     "default": ""
+    },
+    "value": {
+     "default": "70"
+    },
+    "color": {
+     "default": "#0ea5e9"
+    },
+    "showLabel": {
+     "default": "true"
+    }
+   }
+  },
+  "countUp": {
+   "label": "Count Up",
+   "hint": "An animated number counter",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "to": {
+     "default": "100"
+    },
+    "prefix": {
+     "default": ""
+    },
+    "suffix": {
+     "default": ""
+    },
+    "title": {
+     "default": ""
+    },
+    "duration": {
+     "default": "2"
+    },
+    "color": {
+     "default": "#0ea5e9"
+    }
+   }
+  },
+  "countdown": {
+   "label": "Countdown",
+   "hint": "A timer to a date",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "targetDate": {
+     "default": ""
+    },
+    "title": {
+     "default": "Offer ends in"
+    },
+    "expiredText": {
+     "default": "This offer has ended"
+    }
+   }
+  },
+  "appInfo": {
+   "label": "App Info",
+   "hint": "App details, download button and rich-result schema",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "name": {
+     "default": ""
+    },
+    "developer": {
+     "default": ""
+    },
+    "version": {
+     "default": ""
+    },
+    "size": {
+     "default": ""
+    },
+    "requires": {
+     "default": ""
+    },
+    "os": {
+     "default": "Android"
+    },
+    "category": {
+     "default": "UtilitiesApplication"
+    },
+    "updated": {
+     "default": ""
+    },
+    "price": {
+     "default": "0"
+    },
+    "currency": {
+     "default": "USD"
+    },
+    "ratingValue": {
+     "default": ""
+    },
+    "ratingCount": {
+     "default": ""
+    },
+    "downloadUrl": {
+     "default": ""
+    },
+    "buttonText": {
+     "default": "Download"
+    },
+    "icon": {
+     "default": ""
+    },
+    "showSchema": {
+     "default": "1"
+    },
+    "layout": {
+     "default": "card"
+    }
+   }
+  },
+  "plugin": {
+   "label": "Plugin",
+   "hint": "A tool you installed under Plugins",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "slug": {
+     "default": ""
+    },
+    "name": {
+     "default": ""
+    },
+    "attrs": {
+     "default": "{}"
+    }
+   }
+  },
+  "testimonial": {
+   "label": "Testimonial",
+   "hint": "Quote with name and rating",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "quote": {
+     "default": ""
+    },
+    "name": {
+     "default": ""
+    },
+    "role": {
+     "default": ""
+    },
+    "avatar": {
+     "default": ""
+    },
+    "rating": {
+     "default": "5"
+    }
+   }
+  },
+  "videoEmbed": {
+   "label": "Video Embed",
+   "hint": "YouTube or Vimeo by URL",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "url": {
+     "default": ""
+    },
+    "title": {
+     "default": ""
+    },
+    "height": {
+     "default": "400"
+    }
+   }
+  },
+  "googleMap": {
+   "label": "Google Map",
+   "hint": "Embed a map by address",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "query": {
+     "default": ""
+    },
+    "zoom": {
+     "default": "14"
+    },
+    "height": {
+     "default": "400"
+    }
+   }
+  },
+  "accordion": {
+   "label": "Accordion",
+   "hint": "Collapsible sections",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "items": {
+     "default": "[{\"title\":\"Section 1\",\"content\":\"Content here…\"}]"
+    },
+    "closeOthers": {
+     "default": "1"
+    },
+    "startCollapsed": {
+     "default": ""
+    },
+    "initialOpen": {
+     "default": ""
+    },
+    "cols": {
+     "default": ""
+    },
+    "gap": {
+     "default": ""
+    },
+    "showIcon": {
+     "default": "1"
+    },
+    "iconStyle": {
+     "default": "plus"
+    },
+    "iconSide": {
+     "default": "right"
+    },
+    "iconColor": {
+     "default": ""
+    },
+    "hIconColor": {
+     "default": ""
+    },
+    "aIconColor": {
+     "default": ""
+    },
+    "titleTag": {
+     "default": "div"
+    },
+    "titleColor": {
+     "default": ""
+    },
+    "titleBg": {
+     "default": ""
+    },
+    "hTitleColor": {
+     "default": ""
+    },
+    "hTitleBg": {
+     "default": ""
+    },
+    "aTitleColor": {
+     "default": ""
+    },
+    "aTitleBg": {
+     "default": ""
+    },
+    "tBd": {
+     "default": ""
+    },
+    "tBdColor": {
+     "default": ""
+    },
+    "tBdStyle": {
+     "default": "solid"
+    },
+    "hTBd": {
+     "default": ""
+    },
+    "hTBdColor": {
+     "default": ""
+    },
+    "aTBd": {
+     "default": ""
+    },
+    "aTBdColor": {
+     "default": ""
+    },
+    "tRad": {
+     "default": ""
+    },
+    "hTRad": {
+     "default": ""
+    },
+    "aTRad": {
+     "default": ""
+    },
+    "tPad": {
+     "default": ""
+    },
+    "fs": {
+     "default": ""
+    },
+    "lh": {
+     "default": ""
+    },
+    "ls": {
+     "default": ""
+    },
+    "ff": {
+     "default": ""
+    },
+    "fw": {
+     "default": ""
+    },
+    "tt": {
+     "default": ""
+    },
+    "cText": {
+     "default": ""
+    },
+    "cLink": {
+     "default": ""
+    },
+    "cLinkHover": {
+     "default": ""
+    },
+    "cBg": {
+     "default": ""
+    },
+    "cBd": {
+     "default": ""
+    },
+    "cBdColor": {
+     "default": ""
+    },
+    "cBdStyle": {
+     "default": "solid"
+    },
+    "cRad": {
+     "default": ""
+    },
+    "cPad": {
+     "default": ""
+    },
+    "minHeight": {
+     "default": ""
+    },
+    "maxWidth": {
+     "default": ""
+    },
+    "faqSchema": {
+     "default": ""
+    },
+    "anchor": {
+     "default": ""
+    },
+    "cssClass": {
+     "default": ""
+    },
+    "customCss": {
+     "default": ""
+    }
+   }
+  },
+  "tabs": {
+   "label": "Tabs",
+   "hint": "Tabbed panels",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "tabs": {
+     "default": "[{\"label\":\"Tab 1\",\"content\":\"Content here…\"},{\"label\":\"Tab 2\",\"content\":\"Content here…\"}]"
+    }
+   }
+  },
+  "iconList": {
+   "label": "Icon List",
+   "hint": "A list with custom icons",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "items": {
+     "default": "[{\"icon\":\"✓\",\"text\":\"Feature one\"},{\"icon\":\"✓\",\"text\":\"Feature two\"}]"
+    },
+    "cols": {
+     "default": ""
+    },
+    "colGap": {
+     "default": ""
+    },
+    "vGap": {
+     "default": ""
+    },
+    "hGap": {
+     "default": ""
+    },
+    "iconAlign": {
+     "default": ""
+    },
+    "icon": {
+     "default": ""
+    },
+    "iconSize": {
+     "default": ""
+    },
+    "iconColor": {
+     "default": "#0ea5e9"
+    },
+    "iconStyle": {
+     "default": "default"
+    },
+    "iconBg": {
+     "default": ""
+    },
+    "iconBorderColor": {
+     "default": ""
+    },
+    "lineWidth": {
+     "default": ""
+    },
+    "textColor": {
+     "default": ""
+    },
+    "fs": {
+     "default": ""
+    },
+    "lh": {
+     "default": ""
+    },
+    "ls": {
+     "default": ""
+    },
+    "ff": {
+     "default": ""
+    },
+    "fw": {
+     "default": ""
+    },
+    "tt": {
+     "default": ""
+    },
+    "linkColor": {
+     "default": ""
+    },
+    "linkHoverColor": {
+     "default": ""
+    },
+    "underline": {
+     "default": ""
+    },
+    "anchor": {
+     "default": ""
+    },
+    "cssClass": {
+     "default": ""
+    },
+    "customCss": {
+     "default": ""
+    }
+   }
+  },
+  "tableAdvanced": {
+   "label": "Table Advanced",
+   "hint": "Header, footer, stripes and styling",
+   "category": "text",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "rows": {
+     "default": "[[\"Column 1\",\"Column 2\"],[\"\",\"\"],[\"\",\"\"]]"
+    },
+    "caption": {
+     "default": ""
+    },
+    "head": {
+     "default": "1"
+    },
+    "foot": {
+     "default": ""
+    },
+    "fixed": {
+     "default": "1"
+    },
+    "width": {
+     "default": ""
+    },
+    "align": {
+     "default": ""
+    },
+    "style": {
+     "default": "default"
+    },
+    "color": {
+     "default": ""
+    },
+    "fs": {
+     "default": ""
+    },
+    "ff": {
+     "default": ""
+    },
+    "bgType": {
+     "default": "color"
+    },
+    "bg": {
+     "default": ""
+    },
+    "bgGradFrom": {
+     "default": ""
+    },
+    "bgGradTo": {
+     "default": ""
+    },
+    "bgGradType": {
+     "default": "linear"
+    },
+    "bgGradAngle": {
+     "default": ""
+    },
+    "headBg": {
+     "default": ""
+    },
+    "headColor": {
+     "default": ""
+    },
+    "headWeight": {
+     "default": ""
+    },
+    "footBg": {
+     "default": ""
+    },
+    "stripeColor": {
+     "default": ""
+    },
+    "rowHoverBg": {
+     "default": ""
+    },
+    "bd": {
+     "default": ""
+    },
+    "bdColor": {
+     "default": ""
+    },
+    "bdStyle": {
+     "default": "solid"
+    },
+    "cellPad": {
+     "default": ""
+    },
+    "anchor": {
+     "default": ""
+    },
+    "cssClass": {
+     "default": ""
+    },
+    "customCss": {
+     "default": ""
+    }
+   }
+  },
+  "tableOfContents": {
+   "label": "Table of Contents",
+   "hint": "Auto-built from your headings",
+   "category": "text",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "title": {
+     "default": "Table of Contents"
+    },
+    "showTitle": {
+     "default": "1"
+    },
+    "showNumbers": {
+     "default": "true"
+    },
+    "levels": {
+     "default": "123456"
+    },
+    "collapsible": {
+     "default": ""
+    },
+    "startCollapsed": {
+     "default": ""
+    },
+    "titleToggle": {
+     "default": "1"
+    },
+    "showIcon": {
+     "default": "1"
+    },
+    "iconStyle": {
+     "default": "plus"
+    },
+    "iconColor": {
+     "default": ""
+    },
+    "titleColor": {
+     "default": ""
+    },
+    "titleBg": {
+     "default": ""
+    },
+    "tFs": {
+     "default": ""
+    },
+    "tLh": {
+     "default": ""
+    },
+    "tLs": {
+     "default": ""
+    },
+    "tFf": {
+     "default": ""
+    },
+    "tFw": {
+     "default": ""
+    },
+    "tTt": {
+     "default": ""
+    },
+    "tPad": {
+     "default": ""
+    },
+    "tBd": {
+     "default": ""
+    },
+    "tBdColor": {
+     "default": ""
+    },
+    "tBdStyle": {
+     "default": "solid"
+    },
+    "tRad": {
+     "default": ""
+    },
+    "tMargin": {
+     "default": ""
+    },
+    "listGap": {
+     "default": ""
+    },
+    "listColor": {
+     "default": ""
+    },
+    "listStyle": {
+     "default": "underline"
+    },
+    "lFs": {
+     "default": ""
+    },
+    "lLh": {
+     "default": ""
+    },
+    "lLs": {
+     "default": ""
+    },
+    "lFf": {
+     "default": ""
+    },
+    "lFw": {
+     "default": ""
+    },
+    "lTt": {
+     "default": ""
+    },
+    "listMargin": {
+     "default": ""
+    },
+    "activeColor": {
+     "default": ""
+    },
+    "bg": {
+     "default": ""
+    },
+    "bd": {
+     "default": ""
+    },
+    "bdColor": {
+     "default": ""
+    },
+    "bdStyle": {
+     "default": "solid"
+    },
+    "rad": {
+     "default": ""
+    },
+    "shadow": {
+     "default": ""
+    },
+    "pad": {
+     "default": ""
+    },
+    "margin": {
+     "default": ""
+    },
+    "maxWidth": {
+     "default": ""
+    },
+    "smoothScroll": {
+     "default": "1"
+    },
+    "highlightActive": {
+     "default": ""
+    },
+    "anchor": {
+     "default": ""
+    },
+    "cssClass": {
+     "default": ""
+    },
+    "customCss": {
+     "default": ""
+    }
+   }
+  },
+  "authorBio": {
+   "label": "Author Bio",
+   "hint": "Avatar, name, biography and socials — live from the account",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "show": {
+     "default": "avatar,name,bio,social"
+    },
+    "align": {
+     "default": "center"
+    },
+    "avatarSize": {
+     "default": "96px"
+    },
+    "avatarShape": {
+     "default": "circle"
+    },
+    "nameTag": {
+     "default": "h2"
+    },
+    "nameColor": {
+     "default": ""
+    },
+    "nameFs": {
+     "default": ""
+    },
+    "bioColor": {
+     "default": ""
+    },
+    "bioFs": {
+     "default": ""
+    },
+    "socialColor": {
+     "default": ""
+    },
+    "socialSize": {
+     "default": ""
+    },
+    "socialGap": {
+     "default": ""
+    },
+    "bg": {
+     "default": ""
+    },
+    "rad": {
+     "default": ""
+    },
+    "pad": {
+     "default": ""
+    },
+    "margin": {
+     "default": ""
+    },
+    "maxWidth": {
+     "default": ""
+    },
+    "anchor": {
+     "default": ""
+    },
+    "cssClass": {
+     "default": ""
+    },
+    "customCss": {
+     "default": ""
+    }
+   }
+  },
+  "splitContent": {
+   "label": "Split Content",
+   "hint": "Image beside text",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "image": {
+     "default": ""
+    },
+    "imagePosition": {
+     "default": "right"
+    },
+    "heading": {
+     "default": ""
+    },
+    "text": {
+     "default": ""
+    },
+    "buttonText": {
+     "default": ""
+    },
+    "buttonUrl": {
+     "default": ""
+    }
+   }
+  },
+  "callout": {
+   "label": "Callout",
+   "hint": "A highlighted box",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "text": {
+     "default": ""
+    },
+    "emoji": {
+     "default": "💡"
+    },
+    "bgColor": {
+     "default": "#fef9c3"
+    }
+   }
+  },
+  "iframeEmbedAdvanced": {
+   "label": "Iframe Embed Advanced",
+   "hint": "Embed a page in a card with header, notice and button",
+   "category": "embed",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "url": {
+     "default": ""
+    },
+    "frameTitle": {
+     "default": ""
+    },
+    "height": {
+     "default": "600"
+    },
+    "heightMobile": {
+     "default": "520"
+    },
+    "lazy": {
+     "default": "true"
+    },
+    "allowFullscreen": {
+     "default": "true"
+    },
+    "frameBg": {
+     "default": "#e5e7eb"
+    },
+    "showHeader": {
+     "default": "true"
+    },
+    "heading": {
+     "default": "Check your status"
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "footerTag": {
+     "default": "p"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "headerBg": {
+     "default": "#0b3d2e"
+    },
+    "headerText": {
+     "default": "#ffffff"
+    },
+    "showBadge": {
+     "default": "true"
+    },
+    "badge": {
+     "default": "Official service"
+    },
+    "badgeBg": {
+     "default": "transparent"
+    },
+    "badgeText": {
+     "default": "#ffffff"
+    },
+    "badgeBorder": {
+     "default": "#ffffff66"
+    },
+    "showNotice": {
+     "default": "true"
+    },
+    "noticeIcon": {
+     "default": "⚠"
+    },
+    "notice": {
+     "default": "Enter your details only inside the official window. If it does not load here, use the button below to open it directly."
+    },
+    "noticeBg": {
+     "default": "#fdf0e0"
+    },
+    "noticeText": {
+     "default": "#9a3412"
+    },
+    "showFooter": {
+     "default": "true"
+    },
+    "footerText": {
+     "default": "Portal not loading inside the page? Open it directly in a new window."
+    },
+    "footerBg": {
+     "default": "#ffffff"
+    },
+    "footerTextColor": {
+     "default": "#475569"
+    },
+    "footerAlign": {
+     "default": "split"
+    },
+    "showButton": {
+     "default": "true"
+    },
+    "buttonLabel": {
+     "default": "Open official portal"
+    },
+    "buttonUrl": {
+     "default": ""
+    },
+    "buttonNewTab": {
+     "default": "true"
+    },
+    "buttonBg": {
+     "default": "#0b3d2e"
+    },
+    "buttonText": {
+     "default": "#ffffff"
+    },
+    "buttonRadius": {
+     "default": "10"
+    },
+    "radius": {
+     "default": "18"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "shadow": {
+     "default": "true"
+    }
+   }
+  },
+  "stepsGrid": {
+   "label": "Steps Grid",
+   "hint": "1–25 numbered steps or guides in a grid",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "steps": {
+     "default": "[{\"title\":\"Prepare the file\",\"text\":\"Review the category and conditions, then collect the documents for your case.\",\"number\":\"\",\"url\":\"\"},{\"title\":\"Apply\",\"text\":\"Apply at the office serving your area and follow its official instructions.\",\"number\":\"\",\"url\":\"\"},{\"title\":\"Assessment\",\"text\":\"Details, documents and circumstances are reviewed before a decision.\",\"number\":\"\",\"url\":\"\"},{\"title\":\"Check and follow up\",\"text\":\"Check your status, then file a complaint or appeal only if needed.\",\"number\":\"\",\"url\":\"\"}]"
+    },
+    "layout": {
+     "default": "joined"
+    },
+    "columns": {
+     "default": "4"
+    },
+    "columnsTablet": {
+     "default": "2"
+    },
+    "columnsMobile": {
+     "default": "1"
+    },
+    "colGap": {
+     "default": "20"
+    },
+    "rowGap": {
+     "default": "20"
+    },
+    "itemPadding": {
+     "default": "24"
+    },
+    "numbering": {
+     "default": "padded"
+    },
+    "numberPrefix": {
+     "default": ""
+    },
+    "start": {
+     "default": "1"
+    },
+    "numberStyle": {
+     "default": "badge"
+    },
+    "numberTag": {
+     "default": "span"
+    },
+    "titleTag": {
+     "default": "h3"
+    },
+    "textTag": {
+     "default": "p"
+    },
+    "titleSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    },
+    "align": {
+     "default": "start"
+    },
+    "gap": {
+     "default": "20"
+    },
+    "radius": {
+     "default": "14"
+    },
+    "cardBg": {
+     "default": "#ffffff"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "numberColor": {
+     "default": "#c2410c"
+    },
+    "numberBg": {
+     "default": "#fff7ed"
+    },
+    "titleColor": {
+     "default": "#0f172a"
+    },
+    "textColor": {
+     "default": "#475569"
+    },
+    "hoverLift": {
+     "default": "true"
+    }
+   }
+  },
+  "hero": {
+   "label": "Hero",
+   "hint": "Page top: heading, text, ticks, buttons and a photo",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "layout": {
+     "default": "split"
+    },
+    "imageSide": {
+     "default": "right"
+    },
+    "eyebrow": {
+     "default": ""
+    },
+    "heading": {
+     "default": "Say what you do in one clear line"
+    },
+    "text": {
+     "default": "A sentence or two on who this is for and what they get."
+    },
+    "ticks": {
+     "default": ""
+    },
+    "btn1Label": {
+     "default": "Get started"
+    },
+    "btn1Url": {
+     "default": ""
+    },
+    "btn2Label": {
+     "default": ""
+    },
+    "btn2Url": {
+     "default": ""
+    },
+    "image": {
+     "default": ""
+    },
+    "imageAlt": {
+     "default": ""
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "align": {
+     "default": "start"
+    },
+    "bg": {
+     "default": "#0b2545"
+    },
+    "bg2": {
+     "default": ""
+    },
+    "overlay": {
+     "default": "60"
+    },
+    "headingColor": {
+     "default": "#ffffff"
+    },
+    "copyColor": {
+     "default": "#dbe5f1"
+    },
+    "eyebrowColor": {
+     "default": "#f5a623"
+    },
+    "tickColor": {
+     "default": "#f5a623"
+    },
+    "btnBg": {
+     "default": "#f5a623"
+    },
+    "btnColor": {
+     "default": "#0b2545"
+    },
+    "btn2Color": {
+     "default": "#ffffff"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "minHeight": {
+     "default": "0"
+    },
+    "padding": {
+     "default": "72"
+    },
+    "paddingMobile": {
+     "default": "40"
+    },
+    "radius": {
+     "default": "0"
+    },
+    "imageRadius": {
+     "default": "16"
+    },
+    "btnRadius": {
+     "default": "10"
+    },
+    "innerWidth": {
+     "default": "1152"
+    },
+    "flush": {
+     "default": "false"
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "ctaBand": {
+   "label": "CTA Band",
+   "hint": "Coloured strip with a heading and buttons",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "layout": {
+     "default": "center"
+    },
+    "heading": {
+     "default": "Ready when you are"
+    },
+    "text": {
+     "default": "Tell us what you need and we will get straight back to you."
+    },
+    "btn1Label": {
+     "default": "Get in touch"
+    },
+    "btn1Url": {
+     "default": "/contact"
+    },
+    "btn2Label": {
+     "default": ""
+    },
+    "btn2Url": {
+     "default": ""
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "bg": {
+     "default": "#0b2545"
+    },
+    "bg2": {
+     "default": ""
+    },
+    "headingColor": {
+     "default": "#ffffff"
+    },
+    "copyColor": {
+     "default": "#dbe5f1"
+    },
+    "btnBg": {
+     "default": "#f5a623"
+    },
+    "btnColor": {
+     "default": "#0b2545"
+    },
+    "btn2Color": {
+     "default": "#ffffff"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "padding": {
+     "default": "56"
+    },
+    "paddingMobile": {
+     "default": "36"
+    },
+    "radius": {
+     "default": "16"
+    },
+    "btnRadius": {
+     "default": "10"
+    },
+    "innerWidth": {
+     "default": "1152"
+    },
+    "flush": {
+     "default": "false"
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "cardGrid": {
+   "label": "Card Grid",
+   "hint": "Services or features as cards with photo, text and link",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "heading": {
+     "default": ""
+    },
+    "intro": {
+     "default": ""
+    },
+    "cards": {
+     "default": "[{\"image\":\"\",\"alt\":\"\",\"icon\":\"🔧\",\"title\":\"First service\",\"text\":\"One or two lines on what it is and who it is for.\",\"url\":\"\"},{\"image\":\"\",\"alt\":\"\",\"icon\":\"🛠️\",\"title\":\"Second service\",\"text\":\"One or two lines on what it is and who it is for.\",\"url\":\"\"},{\"image\":\"\",\"alt\":\"\",\"icon\":\"⚡\",\"title\":\"Third service\",\"text\":\"One or two lines on what it is and who it is for.\",\"url\":\"\"}]"
+    },
+    "columns": {
+     "default": "3"
+    },
+    "columnsTablet": {
+     "default": "2"
+    },
+    "columnsMobile": {
+     "default": "1"
+    },
+    "gap": {
+     "default": "24"
+    },
+    "align": {
+     "default": "start"
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "titleTag": {
+     "default": "h3"
+    },
+    "ratio": {
+     "default": "16/9"
+    },
+    "linkLabel": {
+     "default": "Learn more"
+    },
+    "showLink": {
+     "default": "true"
+    },
+    "shadow": {
+     "default": "true"
+    },
+    "cardBg": {
+     "default": "#ffffff"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "headingColor": {
+     "default": "#0f172a"
+    },
+    "introColor": {
+     "default": "#475569"
+    },
+    "titleColor": {
+     "default": "#0f172a"
+    },
+    "copyColor": {
+     "default": "#475569"
+    },
+    "iconColor": {
+     "default": "#0b6fb8"
+    },
+    "linkColor": {
+     "default": "#0b6fb8"
+    },
+    "radius": {
+     "default": "14"
+    },
+    "padding": {
+     "default": "22"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "titleSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "statsStrip": {
+   "label": "Stats Strip",
+   "hint": "Two to six figures in a row",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "items": {
+     "default": "[{\"value\":\"10+\",\"label\":\"Years of experience\"},{\"value\":\"24/7\",\"label\":\"Available\"},{\"value\":\"100%\",\"label\":\"Satisfaction promise\"}]"
+    },
+    "bg": {
+     "default": "#f4f8fb"
+    },
+    "valueColor": {
+     "default": "#0b2545"
+    },
+    "labelColor": {
+     "default": "#55708c"
+    },
+    "dividerColor": {
+     "default": "#c7d5e3"
+    },
+    "dividers": {
+     "default": "true"
+    },
+    "valueSize": {
+     "default": ""
+    },
+    "padding": {
+     "default": "32"
+    },
+    "radius": {
+     "default": "16"
+    },
+    "labelSize": {
+     "default": ""
+    }
+   }
+  },
+  "prosCons": {
+   "label": "Pros & Cons",
+   "hint": "Two lists side by side with ticks and crosses",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "prosTitle": {
+     "default": "Pros"
+    },
+    "consTitle": {
+     "default": "Cons"
+    },
+    "pros": {
+     "default": "Easy to set up\nWorks on every device\nFree to start"
+    },
+    "cons": {
+     "default": "Needs an account\nNo offline mode"
+    },
+    "titleTag": {
+     "default": "h3"
+    },
+    "prosColor": {
+     "default": "#15803d"
+    },
+    "consColor": {
+     "default": "#b91c1c"
+    },
+    "prosBg": {
+     "default": "#f0fdf4"
+    },
+    "consBg": {
+     "default": "#fef2f2"
+    },
+    "copyColor": {
+     "default": "#1f2937"
+    },
+    "radius": {
+     "default": "14"
+    },
+    "padding": {
+     "default": "22"
+    },
+    "titleSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "callBar": {
+   "label": "Call Bar",
+   "hint": "Call button fixed to the bottom of the screen",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "phone": {
+     "default": ""
+    },
+    "label": {
+     "default": "Call now"
+    },
+    "showNumber": {
+     "default": "true"
+    },
+    "text": {
+     "default": ""
+    },
+    "btn2Label": {
+     "default": ""
+    },
+    "btn2Url": {
+     "default": ""
+    },
+    "show": {
+     "default": "mobile"
+    },
+    "bg": {
+     "default": "#0b2545"
+    },
+    "copyColor": {
+     "default": "#ffffff"
+    },
+    "btnBg": {
+     "default": "#f5a623"
+    },
+    "btnColor": {
+     "default": "#0b2545"
+    },
+    "btn2Color": {
+     "default": "#ffffff"
+    },
+    "radius": {
+     "default": "10"
+    }
+   }
+  },
+  "logoStrip": {
+   "label": "Logo Strip",
+   "hint": "A row of partner or client logos",
+   "category": "social",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "heading": {
+     "default": "Trusted by"
+    },
+    "logos": {
+     "default": "[]"
+    },
+    "height": {
+     "default": "40"
+    },
+    "gap": {
+     "default": "40"
+    },
+    "gray": {
+     "default": "true"
+    },
+    "align": {
+     "default": "center"
+    },
+    "headingColor": {
+     "default": "#64748b"
+    }
+   }
+  },
+  "noticeBar": {
+   "label": "Notice Bar",
+   "hint": "One-line announcement with an optional link",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "icon": {
+     "default": "📣"
+    },
+    "text": {
+     "default": "Write your announcement here."
+    },
+    "linkLabel": {
+     "default": ""
+    },
+    "url": {
+     "default": ""
+    },
+    "align": {
+     "default": "center"
+    },
+    "bg": {
+     "default": "#fef3c7"
+    },
+    "copyColor": {
+     "default": "#78350f"
+    },
+    "linkColor": {
+     "default": "#78350f"
+    },
+    "radius": {
+     "default": "10"
+    },
+    "padding": {
+     "default": "12"
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "comparisonTable": {
+   "label": "Comparison Table",
+   "hint": "Options side by side with ticks and crosses",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "caption": {
+     "default": ""
+    },
+    "cols": {
+     "default": "[\"Feature\",\"Option A\",\"Option B\"]"
+    },
+    "rows": {
+     "default": "[[\"Free to use\",\"yes\",\"no\"],[\"Works offline\",\"yes\",\"yes\"],[\"Price\",\"Free\",\"$5 a month\"]]"
+    },
+    "highlight": {
+     "default": "0"
+    },
+    "stripes": {
+     "default": "true"
+    },
+    "headBg": {
+     "default": "#0b2545"
+    },
+    "headColor": {
+     "default": "#ffffff"
+    },
+    "highlightBg": {
+     "default": "#fff7e6"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "copyColor": {
+     "default": "#1f2937"
+    },
+    "yesColor": {
+     "default": "#15803d"
+    },
+    "noColor": {
+     "default": "#b91c1c"
+    },
+    "yesLabel": {
+     "default": "Yes"
+    },
+    "noLabel": {
+     "default": "No"
+    },
+    "radius": {
+     "default": "12"
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "versionHistory": {
+   "label": "Version History",
+   "hint": "Changelog: each release and what changed",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "heading": {
+     "default": "Version history"
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "versions": {
+     "default": "[{\"version\":\"2.1.0\",\"date\":\"2026-10-01\",\"changes\":\"Faster start-up\\nFixed a crash when opening large files\"},{\"version\":\"2.0.0\",\"date\":\"2026-08-15\",\"changes\":\"New design\\nDark mode\"}]"
+    },
+    "fold": {
+     "default": "true"
+    },
+    "latestLabel": {
+     "default": "Latest"
+    },
+    "accent": {
+     "default": "#0b6fb8"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "headingColor": {
+     "default": "#0f172a"
+    },
+    "copyColor": {
+     "default": "#334155"
+    },
+    "mutedColor": {
+     "default": "#64748b"
+    },
+    "radius": {
+     "default": "12"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "linkGrid": {
+   "label": "Link Grid",
+   "hint": "Many links in columns: service areas, services, guides",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "heading": {
+     "default": "Areas we serve"
+    },
+    "intro": {
+     "default": ""
+    },
+    "links": {
+     "default": "First town | /first-town\nSecond town | /second-town\nThird town | /third-town"
+    },
+    "icon": {
+     "default": "📍"
+    },
+    "look": {
+     "default": "plain"
+    },
+    "columns": {
+     "default": "4"
+    },
+    "columnsTablet": {
+     "default": "3"
+    },
+    "columnsMobile": {
+     "default": "2"
+    },
+    "gap": {
+     "default": "12"
+    },
+    "align": {
+     "default": "start"
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "headingColor": {
+     "default": "#0f172a"
+    },
+    "introColor": {
+     "default": "#475569"
+    },
+    "linkColor": {
+     "default": "#0b6fb8"
+    },
+    "copyColor": {
+     "default": "#334155"
+    },
+    "itemBg": {
+     "default": "#f4f8fb"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "radius": {
+     "default": "10"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "reviewGrid": {
+   "label": "Review Grid",
+   "hint": "Several customer reviews side by side",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "heading": {
+     "default": "What customers say"
+    },
+    "reviews": {
+     "default": "[{\"quote\":\"\",\"name\":\"\",\"detail\":\"\",\"rating\":\"5\",\"source\":\"\"}]"
+    },
+    "columns": {
+     "default": "3"
+    },
+    "columnsTablet": {
+     "default": "2"
+    },
+    "columnsMobile": {
+     "default": "1"
+    },
+    "gap": {
+     "default": "20"
+    },
+    "align": {
+     "default": "start"
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "ratedLabel": {
+     "default": "Rated {n} out of 5"
+    },
+    "cardBg": {
+     "default": "#ffffff"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "headingColor": {
+     "default": "#0f172a"
+    },
+    "quoteColor": {
+     "default": "#1f2937"
+    },
+    "nameColor": {
+     "default": "#0f172a"
+    },
+    "mutedColor": {
+     "default": "#64748b"
+    },
+    "starColor": {
+     "default": "#f59e0b"
+    },
+    "shadow": {
+     "default": "true"
+    },
+    "radius": {
+     "default": "14"
+    },
+    "padding": {
+     "default": "22"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "priceList": {
+   "label": "Price List",
+   "hint": "Services or items with a price each",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "heading": {
+     "default": "Prices"
+    },
+    "items": {
+     "default": "[{\"name\":\"First service\",\"note\":\"What it includes\",\"price\":\"$40\"},{\"name\":\"Second service\",\"note\":\"\",\"price\":\"$65\"},{\"name\":\"Third service\",\"note\":\"\",\"price\":\"From $90\"}]"
+    },
+    "footnote": {
+     "default": ""
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "leader": {
+     "default": "true"
+    },
+    "bg": {
+     "default": "#ffffff"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "headingColor": {
+     "default": "#0f172a"
+    },
+    "nameColor": {
+     "default": "#0f172a"
+    },
+    "noteColor": {
+     "default": "#64748b"
+    },
+    "priceColor": {
+     "default": "#0b6fb8"
+    },
+    "radius": {
+     "default": "14"
+    },
+    "padding": {
+     "default": "24"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "keyTakeaways": {
+   "label": "Key Takeaways",
+   "hint": "The article in a few points, in a box",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "title": {
+     "default": "Key takeaways"
+    },
+    "points": {
+     "default": "The first thing a reader should remember\nThe second thing\nThe third thing"
+    },
+    "icon": {
+     "default": "💡"
+    },
+    "marker": {
+     "default": "tick"
+    },
+    "titleTag": {
+     "default": "h2"
+    },
+    "bg": {
+     "default": "#f4f8fb"
+    },
+    "accent": {
+     "default": "#0b6fb8"
+    },
+    "titleColor": {
+     "default": "#0f172a"
+    },
+    "copyColor": {
+     "default": "#1f2937"
+    },
+    "radius": {
+     "default": "14"
+    },
+    "padding": {
+     "default": "24"
+    },
+    "bar": {
+     "default": "true"
+    },
+    "titleSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "factSheet": {
+   "label": "Fact Sheet",
+   "hint": "Label and value pairs: specifications, key facts",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "heading": {
+     "default": "Details"
+    },
+    "rows": {
+     "default": "Size | 24 MB\nVersion | 2.1.0\nUpdated | October 2026\nPrice | Free"
+    },
+    "columns": {
+     "default": "1"
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "stripes": {
+     "default": "true"
+    },
+    "bg": {
+     "default": "#ffffff"
+    },
+    "stripeBg": {
+     "default": "#f4f8fb"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "headingColor": {
+     "default": "#0f172a"
+    },
+    "labelColor": {
+     "default": "#475569"
+    },
+    "valueColor": {
+     "default": "#0f172a"
+    },
+    "radius": {
+     "default": "12"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    }
+   }
+  },
+  "shareButtons": {
+   "label": "Share Buttons",
+   "hint": "Share this page: Facebook, X, WhatsApp and more, with no tracking scripts",
+   "category": "social",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "label": {
+     "default": "Share this"
+    },
+    "show": {
+     "default": "facebook,x,whatsapp,email"
+    },
+    "look": {
+     "default": "solid"
+    },
+    "names": {
+     "default": "true"
+    },
+    "align": {
+     "default": "start"
+    },
+    "shareWord": {
+     "default": "Share on"
+    },
+    "labelColor": {
+     "default": "#475569"
+    },
+    "radius": {
+     "default": "10"
+    },
+    "size": {
+     "default": "40"
+    }
+   }
+  },
+  "highlightPanel": {
+   "label": "Highlight Panel",
+   "hint": "Coloured panel: heading and 1–12 points in columns",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "heading": {
+     "default": "Before believing a payment or increase story"
+    },
+    "intro": {
+     "default": ""
+    },
+    "points": {
+     "default": "[{\"title\":\"Find the source\",\"text\":\"The story should clearly name who made the decision or statement.\",\"icon\":\"\",\"url\":\"\"},{\"title\":\"Check the date\",\"text\":\"An old story may be reposted as new. Check both the publication date and the decision date.\",\"icon\":\"\",\"url\":\"\"},{\"title\":\"Protect your details\",\"text\":\"Status checks belong on the official portal. Never send your ID number to a news site or social page.\",\"icon\":\"\",\"url\":\"\"}]"
+    },
+    "columns": {
+     "default": "3"
+    },
+    "columnsTablet": {
+     "default": "2"
+    },
+    "columnsMobile": {
+     "default": "1"
+    },
+    "colGap": {
+     "default": "32"
+    },
+    "rowGap": {
+     "default": "28"
+    },
+    "padding": {
+     "default": "48"
+    },
+    "paddingMobile": {
+     "default": "24"
+    },
+    "radius": {
+     "default": "24"
+    },
+    "align": {
+     "default": "start"
+    },
+    "headingTag": {
+     "default": "h2"
+    },
+    "introTag": {
+     "default": "p"
+    },
+    "titleTag": {
+     "default": "strong"
+    },
+    "textTag": {
+     "default": "p"
+    },
+    "headingSize": {
+     "default": ""
+    },
+    "titleSize": {
+     "default": ""
+    },
+    "textSize": {
+     "default": ""
+    },
+    "bg": {
+     "default": "#0b3d2e"
+    },
+    "headingColor": {
+     "default": "#ffffff"
+    },
+    "introColor": {
+     "default": "#d1e7df"
+    },
+    "titleColor": {
+     "default": "#ffffff"
+    },
+    "textColor": {
+     "default": "#d1e7df"
+    },
+    "iconColor": {
+     "default": "#fbbf24"
+    },
+    "linkColor": {
+     "default": "#fbbf24"
+    },
+    "divider": {
+     "default": "false"
+    },
+    "linkLabel": {
+     "default": "Learn more"
+    },
+    "dividerColor": {
+     "default": "#ffffff33"
+    }
+   }
+  },
+  "textAdvanced": {
+   "label": "Text Advanced",
+   "hint": "Rich text with tag, colour and spacing",
+   "category": "text",
+   "insertable": true,
+   "content": "inline",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "tag": {
+     "default": "p"
+    },
+    "align": {
+     "default": "left"
+    },
+    "maxWidth": {
+     "default": ""
+    },
+    "maxWidthUnit": {
+     "default": "%"
+    },
+    "linkUrl": {
+     "default": ""
+    },
+    "linkTarget": {
+     "default": "_self"
+    },
+    "color": {
+     "default": ""
+    },
+    "bgColor": {
+     "default": ""
+    },
+    "fontFamily": {
+     "default": ""
+    },
+    "fontSize": {
+     "default": ""
+    },
+    "fontWeight": {
+     "default": "400"
+    },
+    "fontStyle": {
+     "default": "normal"
+    },
+    "lineHeight": {
+     "default": ""
+    },
+    "letterSpacing": {
+     "default": ""
+    },
+    "textTransform": {
+     "default": "none"
+    },
+    "textDecoration": {
+     "default": "none"
+    },
+    "orientation": {
+     "default": "normal"
+    },
+    "textGradient": {
+     "default": "false"
+    },
+    "gradFrom": {
+     "default": "#0ea5e9"
+    },
+    "gradTo": {
+     "default": "#9333ea"
+    },
+    "gradAngle": {
+     "default": "90"
+    },
+    "textShadow": {
+     "default": "false"
+    },
+    "shadowX": {
+     "default": "0"
+    },
+    "shadowY": {
+     "default": "2"
+    },
+    "shadowBlur": {
+     "default": "4"
+    },
+    "shadowColor": {
+     "default": "#00000040"
+    },
+    "highlightColor": {
+     "default": ""
+    },
+    "highlightRadius": {
+     "default": ""
+    },
+    "iconChar": {
+     "default": ""
+    },
+    "iconPos": {
+     "default": "left"
+    },
+    "iconSize": {
+     "default": ""
+    },
+    "iconColor": {
+     "default": ""
+    },
+    "borderWidth": {
+     "default": ""
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "borderStyle": {
+     "default": "solid"
+    },
+    "borderRadius": {
+     "default": ""
+    },
+    "borderTopWidth": {
+     "default": ""
+    },
+    "borderTopColor": {
+     "default": ""
+    },
+    "borderTopStyle": {
+     "default": ""
+    },
+    "borderRightWidth": {
+     "default": ""
+    },
+    "borderRightColor": {
+     "default": ""
+    },
+    "borderRightStyle": {
+     "default": ""
+    },
+    "borderBottomWidth": {
+     "default": ""
+    },
+    "borderBottomColor": {
+     "default": ""
+    },
+    "borderBottomStyle": {
+     "default": ""
+    },
+    "borderLeftWidth": {
+     "default": ""
+    },
+    "borderLeftColor": {
+     "default": ""
+    },
+    "borderLeftStyle": {
+     "default": ""
+    },
+    "paddingTop": {
+     "default": ""
+    },
+    "paddingRight": {
+     "default": ""
+    },
+    "paddingBottom": {
+     "default": ""
+    },
+    "paddingLeft": {
+     "default": ""
+    },
+    "marginTop": {
+     "default": ""
+    },
+    "marginBottom": {
+     "default": ""
+    }
+   }
+  },
+  "imageAdvanced": {
+   "label": "Image Advanced",
+   "hint": "Caption, filters, overlay and link",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "src": {
+     "default": ""
+    },
+    "alt": {
+     "default": ""
+    },
+    "caption": {
+     "default": ""
+    },
+    "align": {
+     "default": "center"
+    },
+    "width": {
+     "default": ""
+    },
+    "widthUnit": {
+     "default": "%"
+    },
+    "height": {
+     "default": ""
+    },
+    "objectFit": {
+     "default": "cover"
+    },
+    "linkUrl": {
+     "default": ""
+    },
+    "linkTarget": {
+     "default": "_self"
+    },
+    "loadMode": {
+     "default": "auto"
+    },
+    "bgColor": {
+     "default": ""
+    },
+    "borderWidth": {
+     "default": ""
+    },
+    "borderStyle": {
+     "default": "solid"
+    },
+    "borderColor": {
+     "default": "#e2e8f0"
+    },
+    "borderRadius": {
+     "default": ""
+    },
+    "boxShadow": {
+     "default": "false"
+    },
+    "shadowX": {
+     "default": "0"
+    },
+    "shadowY": {
+     "default": "8"
+    },
+    "shadowBlur": {
+     "default": "24"
+    },
+    "shadowSpread": {
+     "default": "0"
+    },
+    "shadowColor": {
+     "default": "#00000026"
+    },
+    "filter": {
+     "default": "none"
+    },
+    "filterAmount": {
+     "default": ""
+    },
+    "overlayColor": {
+     "default": ""
+    },
+    "overlayOpacity": {
+     "default": "30"
+    },
+    "hoverEffect": {
+     "default": "none"
+    },
+    "paddingTop": {
+     "default": ""
+    },
+    "paddingRight": {
+     "default": ""
+    },
+    "paddingBottom": {
+     "default": ""
+    },
+    "paddingLeft": {
+     "default": ""
+    },
+    "marginTop": {
+     "default": ""
+    },
+    "marginBottom": {
+     "default": ""
+    },
+    "cssClass": {
+     "default": ""
+    }
+   }
+  },
+  "gallery": {
+   "label": "Gallery",
+   "hint": "A grid of images",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "images": {
+     "default": "[]"
+    },
+    "columns": {
+     "default": "3"
+    },
+    "gap": {
+     "default": "12"
+    },
+    "radius": {
+     "default": "10"
+    },
+    "ratio": {
+     "default": "square"
+    },
+    "captions": {
+     "default": "false"
+    }
+   }
+  },
+  "icon": {
+   "label": "Icon",
+   "hint": "A single icon, optionally linked",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "icon": {
+     "default": "★"
+    },
+    "size": {
+     "default": "40"
+    },
+    "color": {
+     "default": ""
+    },
+    "bg": {
+     "default": ""
+    },
+    "shape": {
+     "default": "none"
+    },
+    "align": {
+     "default": "left"
+    },
+    "url": {
+     "default": ""
+    },
+    "label": {
+     "default": ""
+    }
+   }
+  },
+  "socialIcons": {
+   "label": "Social Icons",
+   "hint": "Links to your profiles",
+   "category": "social",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "items": {
+     "default": "[{\"network\":\"x\",\"url\":\"\"},{\"network\":\"instagram\",\"url\":\"\"}]"
+    },
+    "size": {
+     "default": "20"
+    },
+    "gap": {
+     "default": "10"
+    },
+    "style": {
+     "default": "plain"
+    },
+    "align": {
+     "default": "left"
+    },
+    "color": {
+     "default": ""
+    }
+   }
+  },
+  "starRating": {
+   "label": "Star Rating",
+   "hint": "A score out of five",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "value": {
+     "default": "4.5"
+    },
+    "max": {
+     "default": "5"
+    },
+    "size": {
+     "default": "22"
+    },
+    "color": {
+     "default": "#f59e0b"
+    },
+    "label": {
+     "default": ""
+    },
+    "align": {
+     "default": "left"
+    }
+   }
+  },
+  "businessInfo": {
+   "label": "Business Info",
+   "hint": "Address, phone, hours and map from Local SEO",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "show": {
+     "default": "address,phone,email,hours"
+    },
+    "layout": {
+     "default": "stack"
+    },
+    "title": {
+     "default": ""
+    },
+    "mapHeight": {
+     "default": "260"
+    }
+   }
+  },
+  "slider": {
+   "label": "Slider",
+   "hint": "Swipeable carousel of images or slides",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "slides": {
+     "default": "[{\"image\":\"\",\"alt\":\"\",\"title\":\"Slide one\",\"text\":\"\",\"buttonLabel\":\"\",\"buttonUrl\":\"\"},{\"image\":\"\",\"alt\":\"\",\"title\":\"Slide two\",\"text\":\"\",\"buttonLabel\":\"\",\"buttonUrl\":\"\"},{\"image\":\"\",\"alt\":\"\",\"title\":\"Slide three\",\"text\":\"\",\"buttonLabel\":\"\",\"buttonUrl\":\"\"}]"
+    },
+    "perDesktop": {
+     "default": "1"
+    },
+    "perTablet": {
+     "default": "1"
+    },
+    "perMobile": {
+     "default": "1"
+    },
+    "gap": {
+     "default": "16"
+    },
+    "autoplay": {
+     "default": "true"
+    },
+    "interval": {
+     "default": "5000"
+    },
+    "pauseOnHover": {
+     "default": "true"
+    },
+    "loop": {
+     "default": "true"
+    },
+    "arrows": {
+     "default": "true"
+    },
+    "dots": {
+     "default": "true"
+    },
+    "captions": {
+     "default": "true"
+    },
+    "overlay": {
+     "default": "true"
+    },
+    "ratio": {
+     "default": "16/9"
+    },
+    "radius": {
+     "default": "12"
+    }
+   }
+  },
+  "modal": {
+   "label": "Modal / Popup",
+   "hint": "Content in a popup — on click, after a delay or on exit",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "trigger": {
+     "default": "button"
+    },
+    "triggerLabel": {
+     "default": "Open"
+    },
+    "triggerImage": {
+     "default": ""
+    },
+    "triggerAlign": {
+     "default": "left"
+    },
+    "title": {
+     "default": "Popup title"
+    },
+    "text": {
+     "default": ""
+    },
+    "image": {
+     "default": ""
+    },
+    "video": {
+     "default": ""
+    },
+    "buttonLabel": {
+     "default": ""
+    },
+    "buttonUrl": {
+     "default": ""
+    },
+    "width": {
+     "default": "md"
+    },
+    "autoOpen": {
+     "default": "false"
+    },
+    "delay": {
+     "default": "5"
+    },
+    "exitIntent": {
+     "default": "false"
+    },
+    "oncePerVisitor": {
+     "default": "true"
+    },
+    "closeOnBackdrop": {
+     "default": "true"
+    }
+   }
+  },
+  "lottie": {
+   "label": "Lottie",
+   "hint": "A Lottie .json animation",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "src": {
+     "default": ""
+    },
+    "trigger": {
+     "default": "autoplay"
+    },
+    "loop": {
+     "default": "true"
+    },
+    "speed": {
+     "default": "1"
+    },
+    "width": {
+     "default": "400"
+    },
+    "align": {
+     "default": "center"
+    },
+    "label": {
+     "default": ""
+    }
+   }
+  },
+  "timeline": {
+   "label": "Timeline",
+   "hint": "Steps or events along a line",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "items": {
+     "default": "[{\"date\":\"Step 1\",\"title\":\"Download the APK\",\"text\":\"Get the latest version from the button above.\",\"icon\":\"\"},{\"date\":\"Step 2\",\"title\":\"Allow installs\",\"text\":\"Enable installs from unknown sources in Settings.\",\"icon\":\"\"},{\"date\":\"Step 3\",\"title\":\"Install and open\",\"text\":\"Open the file and follow the prompts.\",\"icon\":\"\"}]"
+    },
+    "layout": {
+     "default": "left"
+    },
+    "marker": {
+     "default": "number"
+    },
+    "lineColor": {
+     "default": ""
+    },
+    "markerColor": {
+     "default": ""
+    },
+    "showDates": {
+     "default": "true"
+    },
+    "animate": {
+     "default": "false"
+    },
+    "titleTag": {
+     "default": "h3"
+    }
+   }
+  },
+  "downloadBox": {
+   "label": "Download Box",
+   "hint": "Download button with file details — 8 designs",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "preset": {
+     "default": "classic"
+    },
+    "title": {
+     "default": "App name"
+    },
+    "subtitle": {
+     "default": ""
+    },
+    "icon": {
+     "default": ""
+    },
+    "badge": {
+     "default": ""
+    },
+    "fileType": {
+     "default": "APK"
+    },
+    "version": {
+     "default": ""
+    },
+    "size": {
+     "default": ""
+    },
+    "requires": {
+     "default": ""
+    },
+    "updated": {
+     "default": ""
+    },
+    "developer": {
+     "default": ""
+    },
+    "downloads": {
+     "default": ""
+    },
+    "rating": {
+     "default": ""
+    },
+    "ratingCount": {
+     "default": ""
+    },
+    "license": {
+     "default": ""
+    },
+    "arch": {
+     "default": ""
+    },
+    "show": {
+     "default": "version,size,requires,updated"
+    },
+    "metaLabels": {
+     "default": "true"
+    },
+    "extra": {
+     "default": "[]"
+    },
+    "features": {
+     "default": ""
+    },
+    "note": {
+     "default": ""
+    },
+    "buttonLabel": {
+     "default": "Download"
+    },
+    "buttonUrl": {
+     "default": ""
+    },
+    "buttonSub": {
+     "default": ""
+    },
+    "buttonIcon": {
+     "default": "true"
+    },
+    "newTab": {
+     "default": "false"
+    },
+    "nofollow": {
+     "default": "false"
+    },
+    "downloadAttr": {
+     "default": "false"
+    },
+    "button2Label": {
+     "default": ""
+    },
+    "button2Url": {
+     "default": ""
+    },
+    "btnFullMobile": {
+     "default": "true"
+    },
+    "countdown": {
+     "default": "off"
+    },
+    "countdownSeconds": {
+     "default": "5"
+    },
+    "countdownText": {
+     "default": "Your download will be ready in {s} seconds"
+    },
+    "schema": {
+     "default": "false"
+    }
+   }
+  },
+  "pricingTable": {
+   "label": "Pricing Table",
+   "hint": "Side-by-side plan cards",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "plans": {
+     "default": "[{\"name\":\"Starter\",\"price\":\"$9\",\"period\":\"/mo\",\"features\":\"One site\\nEmail support\",\"cta\":\"Choose\",\"url\":\"#\",\"featured\":false}]"
+    },
+    "columns": {
+     "default": "3"
+    },
+    "accent": {
+     "default": ""
+    }
+   }
+  },
+  "teamMember": {
+   "label": "Team Member",
+   "hint": "Photo, name, role and links",
+   "category": "social",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "photo": {
+     "default": ""
+    },
+    "name": {
+     "default": ""
+    },
+    "role": {
+     "default": ""
+    },
+    "bio": {
+     "default": ""
+    },
+    "links": {
+     "default": "[]"
+    },
+    "layout": {
+     "default": "stacked"
+    },
+    "align": {
+     "default": "center"
+    },
+    "shape": {
+     "default": "circle"
+    }
+   }
+  },
+  "showMore": {
+   "label": "Show More",
+   "hint": "Long text behind a button",
+   "category": "highlight",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "text": {
+     "default": ""
+    },
+    "height": {
+     "default": "160"
+    },
+    "moreLabel": {
+     "default": "Show more"
+    },
+    "lessLabel": {
+     "default": "Show less"
+    },
+    "fade": {
+     "default": "true"
+    }
+   }
+  },
+  "htmlEmbed": {
+   "label": "HTML Embed",
+   "hint": "Paste any embed code",
+   "category": "embed",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "html": {
+     "default": ""
+    }
+   }
+  },
+  "imageCompare": {
+   "label": "Image Compare",
+   "hint": "Before and after slider",
+   "category": "media",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "before": {
+     "default": ""
+    },
+    "after": {
+     "default": ""
+    },
+    "beforeLabel": {
+     "default": "Before"
+    },
+    "afterLabel": {
+     "default": "After"
+    },
+    "start": {
+     "default": "50"
+    },
+    "radius": {
+     "default": "10"
+    }
+   }
+  },
+  "postGrid": {
+   "label": "Post Grid",
+   "hint": "Your latest posts, live",
+   "category": "data",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "heading": {
+     "default": ""
+    },
+    "count": {
+     "default": "3"
+    },
+    "columns": {
+     "default": "3"
+    },
+    "categoryId": {
+     "default": ""
+    },
+    "orderBy": {
+     "default": "recent"
+    },
+    "showImage": {
+     "default": "true"
+    },
+    "showDate": {
+     "default": "true"
+    },
+    "showExcerpt": {
+     "default": "true"
+    }
+   }
+  },
+  "contactForm": {
+   "label": "Contact Form",
+   "hint": "Messages land in your inbox",
+   "category": "form",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "formName": {
+     "default": "Contact"
+    },
+    "fields": {
+     "default": ""
+    },
+    "submitLabel": {
+     "default": "Send message"
+    },
+    "successMessage": {
+     "default": "Thanks — your message has been sent."
+    },
+    "redirectUrl": {
+     "default": ""
+    },
+    "align": {
+     "default": "left"
+    },
+    "width": {
+     "default": "640"
+    }
+   }
+  },
+  "rowLayout": {
+   "label": "Row Layout",
+   "hint": "Multi-column row",
+   "category": "layout",
+   "insertable": true,
+   "content": "none",
+   "props": {
+    "bx": {
+     "default": ""
+    },
+    "columns": {
+     "default": "2"
+    },
+    "layout": {
+     "default": ""
+    },
+    "ratio": {
+     "default": ""
+    },
+    "gap": {
+     "default": ""
+    },
+    "padding": {
+     "default": ""
+    },
+    "gutter": {
+     "default": "md"
+    },
+    "gutterCustom": {
+     "default": ""
+    },
+    "vGutter": {
+     "default": "md"
+    },
+    "vGutterCustom": {
+     "default": ""
+    },
+    "valign": {
+     "default": "top"
+    },
+    "mobileStack": {
+     "default": "stack"
+    },
+    "mobileOrder": {
+     "default": "normal"
+    },
+    "bgColor": {
+     "default": ""
+    },
+    "padT": {
+     "default": ""
+    },
+    "padR": {
+     "default": ""
+    },
+    "padB": {
+     "default": ""
+    },
+    "padL": {
+     "default": ""
+    },
+    "minHeight": {
+     "default": ""
+    },
+    "radius": {
+     "default": ""
+    },
+    "inheritMax": {
+     "default": "true"
+    },
+    "maxWidth": {
+     "default": ""
+    },
+    "maxWidthUnit": {
+     "default": "px"
+    },
+    "divTopStyle": {
+     "default": "none"
+    },
+    "divTopColor": {
+     "default": "#ffffff"
+    },
+    "divTopHeight": {
+     "default": "60"
+    },
+    "divTopFlip": {
+     "default": "false"
+    },
+    "divTopWidth": {
+     "default": "100"
+    },
+    "divBotStyle": {
+     "default": "none"
+    },
+    "divBotColor": {
+     "default": "#ffffff"
+    },
+    "divBotHeight": {
+     "default": "60"
+    },
+    "divBotFlip": {
+     "default": "false"
+    },
+    "divBotWidth": {
+     "default": "100"
+    },
+    "bgType": {
+     "default": "color"
+    },
+    "gradType": {
+     "default": "linear"
+    },
+    "gradFrom": {
+     "default": ""
+    },
+    "gradTo": {
+     "default": ""
+    },
+    "gradAngle": {
+     "default": "160"
+    },
+    "bgImage": {
+     "default": ""
+    },
+    "bgSize": {
+     "default": "cover"
+    },
+    "bgPos": {
+     "default": "center center"
+    },
+    "bgRepeat": {
+     "default": "no-repeat"
+    },
+    "bgAttach": {
+     "default": "scroll"
+    },
+    "ovType": {
+     "default": ""
+    },
+    "ovColor": {
+     "default": ""
+    },
+    "ovGradType": {
+     "default": "linear"
+    },
+    "ovGradFrom": {
+     "default": ""
+    },
+    "ovGradTo": {
+     "default": ""
+    },
+    "ovGradAngle": {
+     "default": "160"
+    },
+    "ovOpacity": {
+     "default": "30"
+    },
+    "ovBlend": {
+     "default": "normal"
+    },
+    "bdWidth": {
+     "default": ""
+    },
+    "bdStyle": {
+     "default": "solid"
+    },
+    "bdColor": {
+     "default": ""
+    },
+    "radTL": {
+     "default": ""
+    },
+    "radTR": {
+     "default": ""
+    },
+    "radBR": {
+     "default": ""
+    },
+    "radBL": {
+     "default": ""
+    },
+    "shadow": {
+     "default": "false"
+    },
+    "shX": {
+     "default": "0"
+    },
+    "shY": {
+     "default": "8"
+    },
+    "shBlur": {
+     "default": "24"
+    },
+    "shSpread": {
+     "default": "0"
+    },
+    "shColor": {
+     "default": ""
+    },
+    "textColor": {
+     "default": ""
+    },
+    "linkColor": {
+     "default": ""
+    },
+    "linkHoverColor": {
+     "default": ""
+    },
+    "htmlTag": {
+     "default": "div"
+    },
+    "maxHeight": {
+     "default": ""
+    },
+    "fullHeight": {
+     "default": "false"
+    },
+    "zIndex": {
+     "default": ""
+    },
+    "hideLoggedIn": {
+     "default": "false"
+    },
+    "hideLoggedOut": {
+     "default": "false"
+    },
+    "contentOnly": {
+     "default": "false"
+    },
+    "anchor": {
+     "default": ""
+    },
+    "cssClass": {
+     "default": ""
+    },
+    "customCss": {
+     "default": ""
+    },
+    "cols": {
+     "default": ""
+    }
+   }
+  }
+ }
+}

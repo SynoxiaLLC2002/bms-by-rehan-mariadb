@@ -1,0 +1,71 @@
+{
+  "name": "next-cms",
+  "version": "2.0.3",
+  "private": true,
+  "scripts": {
+    "check:i18n": "node scripts/check-translations.mjs",
+    "check:xss": "node --experimental-strip-types scripts/check-sanitizer.mts",
+    "check:audit": "node --experimental-strip-types scripts/check-audit.mts",
+    "dev": "next dev --turbopack",
+    "build": "node scripts/block-manifest.mjs && next build && node scripts/tw-safelist.mjs && npm run build:astro",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "db:studio": "drizzle-kit studio",
+    "pack": "node scripts/make-upload.mjs",
+    "check": "node scripts/smoke.mjs",
+    "blocks:manifest": "node scripts/block-manifest.mjs",
+    "build:astro": "node node_modules/astro/bin/astro.mjs build --root astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^7.1.2",
+    "@blocknote/core": "^0.30.0",
+    "@blocknote/mantine": "^0.30.0",
+    "@blocknote/react": "^0.30.0",
+    "@mantine/core": "^7.17.4",
+    "@mantine/hooks": "^7.17.4",
+    "@neondatabase/serverless": "0.10.4",
+    "@vercel/blob": "^2.4.0",
+    "astro": "^7.4.4",
+    "bcryptjs": "^3.0.2",
+    "clsx": "^2.1.1",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "jszip": "^3.10.1",
+    "lottie-web": "^5.13.0",
+    "lucide-react": "^0.511.0",
+    "mysql2": "3.24.4",
+    "next": "15.5.28",
+    "next-auth": "^5.0.0-beta.32",
+    "nodemailer": "^10.0.10",
+    "otplib": "^13.4.1",
+    "qrcode": "^1.5.4",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "tailwind-merge": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.0.0",
+    "@types/nodemailer": "^8.0.2",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.21",
+    "drizzle-kit": "^0.31.1",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "15.5.28",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.0"
+  },
+  "overrides": {
+    "next-auth": {
+      "nodemailer": "$nodemailer"
+    },
+    "next": {
+      "postcss": "$postcss"
+    }
+  }
+}

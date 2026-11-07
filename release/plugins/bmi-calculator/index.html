@@ -1,0 +1,19 @@
+<div class="bmi">
+  <div class="bmi-units" role="tablist">
+    <button type="button" data-units="metric" class="on">Metric</button>
+    <button type="button" data-units="imperial">Imperial</button>
+  </div>
+  <div class="bmi-fields">
+    <label>Height <span class="bmi-h-unit">(cm)</span><input name="height" type="number" inputmode="decimal" min="1" step="0.1" /></label>
+    <label>Weight <span class="bmi-w-unit">(kg)</span><input name="weight" type="number" inputmode="decimal" min="1" step="0.1" /></label>
+  </div>
+  <button type="button" class="bmi-go">Calculate</button>
+  <div class="bmi-result" hidden>
+    <p class="bmi-value">—</p>
+    <p class="bmi-label"></p>
+    <div class="bmi-scale">
+      <span data-range="under">Under 18.5</span><span data-range="normal">18.5–24.9</span><span data-range="over">25–29.9</span><span data-range="obese">30+</span>
+    </div>
+  </div>
+  <p class="bmi-note">BMI is a rough guide and does not account for muscle, age or build.</p>
+</div>

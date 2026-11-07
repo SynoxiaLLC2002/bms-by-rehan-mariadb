@@ -1,0 +1,131 @@
+---
+// Every public document — the homepage, pages, posts, and category archives
+// with the base removed — rendered by Astro from BMS's own route code: the
+// same `generateMetadata` (title, canonical, hreflang, robots, Open Graph,
+// Twitter) and the same page component (header, footer, blocks, JSON-LD) the
+// Next app uses. Anything they do not answer goes back to Next (toNext), which
+// renders it as before: the 404 page, archives, anything this route does not cover.
+import { createElement } from "react";
+import { getSiteSettings } from "@/lib/settings";
+import { contentLanguages, defaultContentLanguage, languageDir, siteDir } from "@/lib/locale";
+import { decodeSegments } from "@/lib/permalinks";
+import ContentRoute, { generateMetadata as documentMetadata } from "@/app/(site)/[lang]/[...path]/page";
+import HomePage, { generateMetadata as homeMetadata } from "@/app/(site)/[lang]/page";
+import { generateMetadata as layoutMetadata, generateViewport } from "@/app/(site)/[lang]/layout";
+import { HttpNotFound, HttpRedirect } from "../../shims/navigation";
+import { toHtml } from "../lib/render";
+import { headTags } from "../lib/head";
+import { inlineHeroSvg } from "../lib/inlineHero";
+// The Next route (src/app/bms-render) passes a request carrying this header back
+// to Next untouched (server.js asks Next again, without Astro).
+const toNext = () => new Response(null, { status: 404, headers: { "x-bms-next": "1" } });
+import vanillaJs from "virtual:bms-vanilla";
+
+const settings = await getSiteSettings();
+const defaultLang = defaultContentLanguage(settings);
+let segments = decodeSegments(String(Astro.params.path ?? "").split("/").filter(Boolean));
+
+// `/fr/...` is the French site; the default language has no prefix.
+let lang = defaultLang;
+if (segments.length && segments[0] !== defaultLang && contentLanguages(settings).includes(segments[0])) {
+  lang = segments[0];
+  segments = segments.slice(1);
+}
+const params = Promise.resolve({ lang, path: segments });
+
+let head = "";
+let body = "";
+const preloads: string[] = [];
+
+/** One <link rel="preload"> as a Link header entry. */
+function linkHeaderOf(tag: string): string {
+  const attr = (name: string) => new RegExp(`\\s${name}="([^"]*)"`, "i").exec(tag)?.[1];
+  const href = attr("href");
+  const as = attr("as");
+  if (!href || !as || /[<>\s,;]/.test(href)) return "";
+  const parts = [`<${href}>`, "rel=preload", `as=${as}`];
+  const type = attr("type");
+  if (type) parts.push(`type="${type}"`);
+  if (/\scrossorigin/i.test(tag)) parts.push("crossorigin");
+  if (attr("fetchPriority") === "high") parts.push("fetchpriority=high");
+  return parts.join("; ");
+}
+try {
+  const [meta, layout, viewport] = await Promise.all([
+    segments.length ? documentMetadata({ params } as never) : homeMetadata({ params } as never),
+    layoutMetadata(),
+    generateViewport(),
+  ]);
+  // No metadata = no live document here (an empty object is what the route
+  // returns for a draft or a missing slug).
+  if (!meta || Object.keys(meta).length === 0) return toNext();
+  // Next applies the layout's "%s | Site" template to child pages only, not to the
+  // homepage, which shares the layout's segment: the same here.
+  const titleLayout = segments.length ? layout : { ...layout, title: { default: "", template: "%s" } };
+  head = headTags(meta as never, titleLayout as never, viewport as never);
+  // The page's stylesheet <link>s (/site/s-…, /site/f-…) are put inline by server.js.
+  body = await toHtml(createElement(segments.length ? ContentRoute : HomePage, { params } as never));
+  // The site's head scripts (Settings → Scripts) arrive in a <template>; moved into
+  // <head> here, so the browser runs them itself in order, with no script of ours.
+  const headScripts = /<template data-bms-head="">([\s\S]*?)<\/template>/.exec(body);
+  if (headScripts) {
+    body = body.replace(headScripts[0], "");
+    head += headScripts[1];
+  }
+  // Tags a component renders for <head> (the feed link, og:updated_time, the
+  // Turnstile key): React leaves them where they are rendered and Next hoists
+  // them; Facebook and Google read them from <head> only. Microdata (itemprop)
+  // stays where it is.
+  body = body.replace(/<meta (?:name|property)="[^"]*"[^>]*>|<link rel="alternate"[^>]*>/g, (tag) => {
+    head += tag;
+    return "";
+  });
+  // React writes <link rel="preload"> where it renders it: in the body, behind
+  // ~30 KB of inline CSS, so on a slow phone the hero image waited ~600 ms before
+  // it was even asked for (PageSpeed: LCP resource load delay). Image preloads go
+  // first in <head>, and into a Link header the browser acts on before any of the
+  // page has arrived. Font preloads stay where they are: moved up, the fonts took
+  // bandwidth from the page itself and first paint went from 0.9 s to 2.1 s, and
+  // nothing waits for them (size-matched fallback, font-display: swap).
+  body = body.replace(/<link rel="preload" as="image"[^>]*>/g, (tag) => {
+    preloads.push(tag);
+    return "";
+  });
+  // A small SVG first-view image goes inside the page: no request, no preload.
+  const heroTag = preloads.find((t) => /fetchPriority="high"/i.test(t));
+  const heroHref = heroTag ? /\shref="([^"]+)"/.exec(heroTag)?.[1] : undefined;
+  const heroData = heroHref ? await inlineHeroSvg(heroHref) : null;
+  if (heroTag && heroData && body.includes(`src="${heroHref}"`)) {
+    body = body.split(`src="${heroHref}"`).join(`src="${heroData}"`);
+    preloads.splice(preloads.indexOf(heroTag), 1);
+  }
+  // Only the image the page marks as its first view: the logo is small and found at once.
+  const link = preloads.filter((t) => /fetchPriority="high"/i.test(t)).map(linkHeaderOf).filter(Boolean).join(", ");
+  if (link) Astro.response.headers.set("Link", link);
+} catch (err) {
+  if (err instanceof HttpNotFound) return toNext();
+  if (err instanceof HttpRedirect) return Astro.redirect(err.location, err.status as 301);
+  throw err;
+}
+
+// Scripts only for what the page has (lib/render.ts writes the islands): the
+// React-free ones inline, React only for a page with a React island.
+const hasVanilla = body.includes("<bms-island data-v=");
+const hasReact = body.includes("<bms-island data-c=");
+const dir = lang === defaultLang ? siteDir(settings) : languageDir(lang);
+// Cache-Control and the LiteSpeed headers come from the middleware, as for every page.
+---
+<!doctype html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Fragment set:html={preloads.join("")} />
+    <Fragment set:html={head} />
+  </head>
+  <body>
+    <Fragment set:html={body} />
+    {hasVanilla && <script is:inline set:html={vanillaJs} />}
+    {hasReact && <script src="../scripts/hydrate.ts"></script>}
+  </body>
+</html>

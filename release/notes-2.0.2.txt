@@ -1,0 +1,5 @@
+One-click updates: the Updates screen installs new signed releases itself, with a Roll back button
+If a new version cannot start, the site goes back to the previous version by itself
+Categories list shows whether each category is indexed by search engines
+The setup screen can create the database itself on cPanel accounts with Terminal access
+Release builds no longer carry any site's pages, images or source code

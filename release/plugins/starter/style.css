@@ -1,0 +1,8 @@
+/* Only this plugin sees these rules; the site's CSS cannot reach in either. */
+.tool { font: 15px/1.5 system-ui, sans-serif; border: 1px solid rgba(0,0,0,.1); border-radius: 12px; padding: 16px; max-width: 420px; --accent: #0ea5e9; }
+.tool-title { margin: 0 0 10px; font-size: 18px; }
+.tool label { display: block; font-size: 13px; font-weight: 600; }
+.tool input { display: block; width: 100%; box-sizing: border-box; margin-top: 4px; padding: 8px 10px; border: 1px solid rgba(0,0,0,.15); border-radius: 8px; font: inherit; }
+.tool-go { margin-top: 12px; padding: 10px 16px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+.tool-out { margin: 12px 0 0; font-weight: 600; }
+:host([dir="rtl"]) .tool { direction: rtl; }

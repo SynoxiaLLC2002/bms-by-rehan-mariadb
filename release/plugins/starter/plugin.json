@@ -1,0 +1,13 @@
+{
+  "slug": "my-tool",
+  "name": "My Tool",
+  "version": "1.0.0",
+  "description": "One line about what this does.",
+  "author": "Your name",
+  "attributes": [
+    { "name": "title", "label": "Heading shown above the tool", "default": "My Tool" }
+  ],
+  "settings": [
+    { "key": "accent", "label": "Accent colour", "type": "color", "default": "#0ea5e9" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "bmi-calculator",
+  "name": "BMI Calculator",
+  "version": "1.0.0",
+  "description": "Body-mass index from height and weight, metric or imperial.",
+  "author": "BMS by Rehan",
+  "minHeight": "260px",
+  "attributes": [
+    { "name": "units", "label": "Default units: metric or imperial", "default": "metric" }
+  ],
+  "settings": [
+    { "key": "accent", "label": "Accent colour", "type": "color", "default": "#0ea5e9" },
+    { "key": "showScale", "label": "Show the BMI scale under the result", "type": "toggle", "default": true },
+    { "key": "buttonText", "label": "Button text", "type": "text", "default": "Calculate" }
+  ]
+}

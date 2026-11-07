@@ -1,0 +1,139 @@
+.bms-be-layout {
+	display: grid;
+	grid-template-columns: minmax(280px, 380px) 1fr;
+	gap: 20px;
+	align-items: start;
+	margin-top: 16px;
+}
+
+@media (max-width: 960px) {
+	.bms-be-layout { grid-template-columns: 1fr; }
+}
+
+.bms-be-panel {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 12px 14px;
+}
+
+.bms-be-panel h2 {
+	margin: 0 0 8px;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: #50575e;
+}
+
+/* Tree */
+
+#bms-be-tree { max-height: 62vh; overflow: auto; }
+
+.bms-be-tree, .bms-be-tree ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.bms-be-tree ul {
+	margin-left: 12px;
+	border-left: 1px solid #dcdcde;
+	padding-left: 8px;
+}
+
+.bms-be-node {
+	display: block;
+	width: 100%;
+	text-align: left;
+	background: none;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	padding: 4px 6px;
+	margin: 1px 0;
+	cursor: pointer;
+	font: inherit;
+	line-height: 1.35;
+}
+
+.bms-be-node:hover { background: #f0f0f1; }
+
+.bms-be-node.is-selected {
+	background: #f0f6fc;
+	border-color: #2271b1;
+}
+
+.bms-be-node-name {
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	color: #1d2327;
+}
+
+.bms-be-node-dims {
+	float: right;
+	font-size: 11px;
+	color: #8c8f94;
+}
+
+.bms-be-node-text {
+	display: block;
+	font-size: 11px;
+	color: #646970;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.bms-be-empty {
+	color: #646970;
+	font-style: italic;
+	font-size: 12px;
+}
+
+/* Preview stage */
+
+#bms-be-stage {
+	position: relative;
+	overflow: hidden;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 3px;
+}
+
+#bms-be-frame {
+	border: 0;
+	display: block;
+	background: #fff;
+}
+
+.bms-be-widths { margin-bottom: 8px; }
+
+.bms-be-widths button.is-active {
+	border-color: #2271b1;
+	color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+}
+
+/* Status + result */
+
+.bms-be-status {
+	margin: 10px 0;
+	padding: 6px 10px;
+	border-left: 4px solid #dcdcde;
+	background: #f6f7f7;
+	font-size: 13px;
+}
+
+.bms-be-status.is-busy { border-left-color: #dba617; }
+.bms-be-status.is-ok { border-left-color: #00a32a; }
+.bms-be-status.is-error { border-left-color: #d63638; }
+
+.bms-be-files {
+	margin: 10px 0 0;
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	color: #50575e;
+}
+
+.bms-be-files li { margin: 0; }
+
+.bms-be-actions { margin: 12px 0; display: flex; gap: 8px; flex-wrap: wrap; }

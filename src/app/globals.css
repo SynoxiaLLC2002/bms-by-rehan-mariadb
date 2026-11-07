@@ -1,0 +1,84 @@
+/*
+ * The admin's stylesheet, built from `tailwind.config.ts` (which scans
+ * everything). The public site uses `site.css` instead, built from a config
+ * that scans only what a visitor can reach — see `tailwind.site.config.ts`.
+ * A rule added here for a frontend component has to be added there too.
+ *
+ * The `@config` below is not optional. Tailwind resolves one config per
+ * stylesheet, but the moment any stylesheet in the build declares one, the
+ * ones that say nothing stop falling back to `tailwind.config.ts` and pick
+ * up whichever config was loaded last. Leaving it off cost the admin 550 of
+ * its 948 selectors — it silently built against the site's narrow scan.
+ */
+@config "../../tailwind.config.ts";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 15 23 42;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-brand-600 text-white hover:bg-brand-700;
+  }
+  .btn-secondary {
+    @apply btn bg-slate-100 text-slate-700 hover:bg-slate-200;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+  .btn-ghost {
+    @apply btn text-slate-600 hover:bg-slate-100;
+  }
+  .input {
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500;
+  }
+  .label {
+    @apply block text-sm font-medium text-slate-700 mb-1;
+  }
+  .card {
+    @apply bg-white rounded-xl border border-slate-200 shadow-sm;
+  }
+  /* The shared <Icon> component's constants; it renders on the site and in the admin alike. */
+  .bms-ico {
+    display: inline-block;
+    vertical-align: -0.125em;
+  }
+  .bms-ico-img {
+    height: 1em;
+    width: 1em;
+    object-fit: contain;
+  }
+}
+
+/* Advanced Image hover effects */
+.img-adv-zoom img {
+  transition: transform 0.45s ease;
+}
+.img-adv-zoom:hover img {
+  transform: scale(1.06);
+}
+.img-adv-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.img-adv-lift:hover {
+  transform: translateY(-5px);
+}

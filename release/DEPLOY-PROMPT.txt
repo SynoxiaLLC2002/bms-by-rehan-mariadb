@@ -1,0 +1,438 @@
+DEPLOY BMS CMS TO A NEW SITE — PROMPT FOR CLAUDE
+=================================================
+
+Paste everything below this line into a new Claude Code session, started in
+the CMS project folder. Fill in nothing beforehand; Claude asks for what it
+needs as it goes.
+
+-------------------------------------------------------------------------------
+
+You are helping me put a new site live on the BMS CMS (a Next.js 15 app with a
+Postgres database). I am not technical. I will do the clicks inside the hosting
+control panel and send you screenshots; you do everything that can be done from
+my computer, and you tell me exactly what to click, one step at a time, waiting
+for me to confirm before moving on.
+
+The hosting is cPanel shared hosting with the "Setup Node.js App" feature
+(CloudLinux Node.js selector, usually behind LiteSpeed). It has no PostgreSQL,
+so the database is a Neon project. This exact setup has worked before; the
+notes at the end are the things that went wrong last time, so check for them
+first rather than last.
+
+
+WHAT YOU NEED FROM ME — ASK FOR THESE FIRST, ALL AT ONCE
+---------------------------------------------------------
+
+1. The domain the site will live on (no https://, no www).
+2. Confirmation that the domain is already added in cPanel (Domains → Domains)
+   and points at this hosting. If I am not sure, tell me how to check.
+3. The Neon connection string. If I do not have one yet, walk me through:
+   neon.tech → New Project (name it after the site, region closest to the
+   host) → Connect → connection pooling OFF → copy. It starts with
+   postgresql://neondb_owner:npg_ … and should end with ?sslmode=require —
+   if it has &channel_binding=require on the end, that part gets removed.
+4. Where the CMS zip is on my computer (bms-cms-<version>.zip), or the folder
+   if I already extracted it.
+5. The cPanel home directory path (shown as "Home Directory" on the cPanel
+   Tools page, e.g. /home/username). You need it for later instructions.
+
+Do not start until you have 1, 3 and 4. Never print the connection string or
+the AUTH_SECRET back to me in the chat once you have them; refer to the file.
+
+
+PART A — YOU DO THIS ON MY COMPUTER
+------------------------------------
+
+Work in a fresh folder for this site (extract the zip if needed). Then:
+
+A1. Create .env.local from .env.example with exactly these set:
+      DATABASE_URL=<the Neon string>
+      AUTH_SECRET=<generate: node -e "console.log(require('crypto').randomBytes(32).toString('base64'))">
+      NEXTAUTH_URL=https://<domain>
+      AUTH_TRUST_HOST=true
+      NEXT_PUBLIC_SITE_URL=https://<domain>
+    No spaces around "=", no quotes.
+
+A2. npm install
+
+A3. npm run db:migrate
+    Must end with "Applied N migrations." — N is however many .sql files are
+    in drizzle/ (18 at the time of writing) — or "up to date" if re-running.
+    Anything else: stop, show me, do not continue.
+
+    You do not need to run this again on the host. server.js applies pending
+    migrations itself on every start, over Neon's HTTP driver, and writes the
+    result to startup.log. It runs them AFTER listen(), deliberately: an early
+    version awaited them before listening, the connection hung on this exact
+    kind of host, and the whole site sat behind a timeout until it was rolled
+    back. So a slow migration degrades the site instead of taking it down —
+    but it also means a FAILED migration is silent from outside. Read
+    startup.log after any deploy that carries a new one.
+
+A4. npm run build
+    Must exit 0 with the route table and no "Error". The build reads the
+    database, so A3 and a working DATABASE_URL must come first.
+
+A5. npm run pack
+    Produces upload.zip in the project folder with correct Linux permissions
+    written in. Do NOT zip the folder with Windows/PowerShell instead — a
+    Windows zip has no Unix permissions and the host then creates folders it
+    cannot read (503 with EACCES). Copy upload.zip to my Desktop and tell me
+    it is there.
+
+Confirm each step's result to me in one line before the next.
+
+
+PART B — I DO THIS IN CPANEL, YOU TELL ME EACH CLICK
+-----------------------------------------------------
+
+Give these one at a time and wait for my screenshot or "done". Use the exact
+labels below; they match what the panel shows.
+
+B1. File Manager: click Settings (top right) → tick "Show Hidden Files
+    (dotfiles)" → Save. Without this I cannot see the .next folder and will
+    think the upload failed.
+
+B2. File Manager, in the home directory: "+ Folder" → name it after the site
+    with no dot (e.g. mysite, not mysite.com — the folder with the dot is the
+    domain's own folder and must be left alone) → Create New Folder →
+    double-click into it. The path box top-left shows the folder name only,
+    relative to home; that is normal.
+
+B3. Upload (toolbar) → Select File → Desktop → upload.zip → wait for 100% →
+    "Go Back to …" link at the bottom. Then right-click upload.zip → Extract →
+    Extract Files → Close → Reload. I should now see .next, public, src,
+    drizzle, scripts, server.js, package.json. Then right-click upload.zip →
+    Delete.
+
+B4. Software → Setup Node.js App → Create Application:
+      Node.js version:          highest 20.x or 22.x offered (18.18 minimum)
+      Application mode:         Production
+      Application root:         the folder from B2
+      Application URL:          the domain, path box empty
+      Application startup file: server.js
+    Ask me for a screenshot of the form BEFORE I click Create, check it, then
+    say Create.
+
+B5. On the app page, Environment variables → Add Variable, eight times.
+
+    THERE IS NO .env.local ON THIS KIND OF HOST. The app reads its settings
+    from this screen only. The .env.local on my computer exists so the build
+    can run there; it is deliberately excluded from the zip and never reaches
+    the server. Do not send me looking for it in File Manager.
+
+    Give me the eight NAMES and, for each, exactly what to paste as the VALUE.
+    For NEXTAUTH_URL, AUTH_TRUST_HOST and NEXT_PUBLIC_SITE_URL the value is
+    literal text — write it out. For DATABASE_URL and AUTH_SECRET tell me to
+    open the .env.local file on my Desktop with Notepad and copy the part after
+    the "=" — do not describe the value in words, because last time I pasted
+    the description itself ("the secret from Notepad") as the value.
+
+      DATABASE_URL          (from .env.local)
+      AUTH_SECRET           (from .env.local)
+      NEXTAUTH_URL          https://<domain>
+      AUTH_TRUST_HOST       true
+      NEXT_PUBLIC_SITE_URL  https://<domain>
+      CRON_TOKEN            (you generate it — see below)
+      NODE_OPTIONS          --max-old-space-size=384
+      MALLOC_ARENA_MAX      2
+
+    CRON_TOKEN: generate it yourself with
+      node -e "console.log(require('crypto').randomBytes(24).toString('base64url'))"
+    and give me the result to paste. It must be at least 16 characters —
+    anything shorter is treated as "not configured" on purpose, and every cron
+    URL then answers 404 while looking like it works. C3 needs this value.
+
+    The last two are the same on every site. They cap how much memory one Node
+    worker can grow to, which matters because shared hosting splits one small
+    memory ceiling across every domain on the account.
+
+    THREE THINGS THAT HAVE GONE WRONG ON THIS SCREEN:
+
+    - Do NOT add a NODE_ENV variable. The "Application mode: Production"
+      dropdown above already sets it. Adding it by hand once produced the
+      value "production " with a trailing space, which is not equal to
+      "production" — Next then logged "You are using a non-standard NODE_ENV
+      value" on every boot and ran in a half-production mode for weeks.
+
+    - No leading or trailing spaces in any NAME or VALUE. cPanel writes these
+      into a shell script as `export NAME=VALUE`; a name with a stray space
+      becomes `export =2`, which fails silently. The variable then simply does
+      not exist, and the only trace is one line in stderr.log per boot:
+        export: `=2': not a valid identifier
+
+    - Check for duplicates before adding. If a name is already in the list,
+      edit that row rather than adding a second one with the same name.
+
+    Then SAVE (top right).
+
+B6. Run NPM Install (wait for the green "completed" toast) → RESTART.
+
+B7. Open https://<domain>/admin/setup in a new tab. It should show a form with
+    Name, Email, Password. If it does, I fill it in and press Continue. Step 2
+    shows a QR code: I scan it with an authenticator app on my phone (Google
+    Authenticator, Microsoft Authenticator, Authy...) and type the 6-digit
+    code. Two-factor sign-in is required for the first account: it owns the
+    site, and with no email set up the authenticator is how a forgotten
+    password gets reset (Forgot password -> Use your authenticator app).
+    Then we go to Part C.
+
+
+IF IT SHOWS 503 OR AN ERROR — DO THIS BEFORE ANYTHING ELSE
+-----------------------------------------------------------
+
+The host shows no error anywhere. server.js writes its own log instead.
+
+1. Ask me to open the site once (to make it try starting), then in File
+   Manager → the app folder → Reload → right-click startup.log → View, and
+   paste you the LAST block of lines. The file grows on every start attempt;
+   only the newest block matters.
+
+2. Match the message:
+   - "EACCES: permission denied" → the upload had no Unix permissions. Current
+     server.js repairs this by itself on start; if this still appears, the
+     server.js on the host is old — re-upload just server.js from the
+     project folder, Restart.
+   - "could not load Next" → Run NPM Install did not complete. Run it again,
+     Restart.
+   - "no production build found" → .next did not come across (usually B1 was
+     skipped so I could not see it, or the zip was extracted into a
+     sub-folder). Check the folder listing.
+   - "DATABASE_URL is not set" → variable not saved or app not restarted after
+     saving. Check B5, SAVE, RESTART.
+   - No startup.log at all → server.js is not being reached: check B4 fields
+     (startup file exactly server.js, root is the right folder), and that the
+     domain's own folder now contains an .htaccess the Node app screen wrote.
+
+3. If you cannot tell, ask me for: a screenshot of the Node.js App page
+   including the variables, and the file listing of the app folder.
+
+Also, from my computer, you can test the live site yourself with curl to see
+the status code; do that whenever I say "still broken" rather than asking me.
+
+
+PART C — AFTER LOGIN, IN THE CMS
+---------------------------------
+
+C1. Settings → Site URL = https://<domain>, Site Name = the site's name → Save.
+    Say clearly that without this every canonical tag and sitemap entry says
+    localhost and search engines index it that way.
+C2. Customizer → Single Post → comments / tags / related / prev-next are all
+    OFF by default; turn on what I want.
+C3. Publish cron, which also keeps the app awake: cPanel → Advanced → Cron
+    Jobs → set the Minute box to */15 and leave Hour/Day/Month/Weekday as * →
+    Command (NOT */3 — every run wakes the database, and on Neon's free plan
+    a 3-minute cron never let it sleep and used up the monthly compute):
+
+        curl -s -o /dev/null -m 30 "https://<domain>/api/cron/publish?token=<CRON_TOKEN>"
+
+    THE ?token= PART IS NOT OPTIONAL. Without it the route answers 404 to
+    every request by design, so the cron keeps the app warm by accident but
+    publishes nothing, cleans nothing and warms nothing — and Site Health goes
+    on complaining. An earlier version of this guide gave the URL with no
+    token and that is exactly what happened: the token sat in the environment
+    for days while the cron quietly did nothing. Paste the same value you set
+    as CRON_TOKEN in B5, and keep the double quotes — without them the shell
+    cuts the URL at the "?".
+
+    This one URL does three jobs: it keeps the app and database awake, it
+    publishes scheduled posts on time, and it runs the daily clean-up. Site
+    Health → "Publish cron" turns green once it has fired.
+    → Add New Cron Job.
+
+    Verify it yourself rather than trusting it: call the URL once with curl.
+    A correct token returns {"ok":true,...}; a wrong one returns 404. Test a
+    deliberately wrong token too, so you know the guard works.
+C4. If images ever 500: Environment variables → add IMAGE_OPTIMIZATION = off
+    → Save → Restart.
+C5. If cPanel's Resource Usage ever shows Physical Memory Usage pinned near
+    100%, do not assume it is a real leak before checking for a stray process
+    first — see items 5 and 6 below.
+C6. DO NOT add a pkill cron during setup. Earlier versions of this guide told
+    you to add this, every five minutes:
+        /usr/bin/pkill -15 -f lsnode
+    On a live site that one line was the cause of months of "the site keeps
+    going down": it killed the live app every five minutes, around the clock,
+    and every visitor who arrived in the gap before the next request woke it
+    got a dead site or a 500. It is a sledgehammer for the memory issue in
+    item 6, and it should be the LAST thing tried, not part of a new install.
+
+    Do D1 (edge caching) first. Most of the memory and CPU pressure that made
+    a pkill cron look necessary is the origin rendering every page and
+    resizing every image for every visitor. Cache at the edge and that load
+    largely disappears.
+
+    If, after D1, memory genuinely keeps climbing over days and you have
+    confirmed the cause is accumulating `lsnode:` workers (item 6), then a
+    pkill cron is a legitimate last resort — but run it ONCE OR TWICE A DAY,
+    at a quiet hour, never every five minutes:
+        0 4 * * *   /usr/bin/pkill -15 -f lsnode
+    Also note it clears every `lsnode:` process on the ACCOUNT, so it restarts
+    every Node site you host, not just this one.
+
+Then do a final check yourself with curl: the home page, /admin/login, /sitemap_index.xml
+and /robots.txt should all be 200, and tell me the site is live.
+
+
+PART D — EDGE CACHING (DO THIS; IT IS NOT OPTIONAL POLISH)
+-----------------------------------------------------------
+
+Only if the domain is on Cloudflare. Skip if it is not, and say so.
+
+Without this, every single page view is a full server render plus database
+queries, and every image is a fresh resize on the CPU. On a shared host that
+is what takes CPU to 100%, and 100% CPU is what makes people add desperate
+things like the pkill cron in C6. With it, most visitors never touch the
+server at all.
+
+Measured on a live site the day it was turned on: 0.41s from the edge
+versus 1.04s from the origin, and the restarts-every-six-minutes problem
+stopped being survivable-by-luck and became irrelevant.
+
+D1. Ask me for the Zone ID: dash.cloudflare.com → click the domain →
+    Overview → scroll the right-hand column to API → copy Zone ID (32 chars).
+
+D2. Walk me through creating the API token: profile icon → My Profile →
+    API Tokens → Create Token → Create Custom Token → Get started.
+    Name: BMS Speed. Then FOUR permission rows (+ Add more three times):
+
+      Zone · Zone           · Read
+      Zone · Zone Settings  · Edit
+      Zone · Cache Rules    · Edit
+      Zone · Cache Purge    · Purge
+
+    All four are needed. Zone:Read is the one people leave off — the CMS's
+    status check calls GET /zones/<id> to read the zone name, and without it
+    the panel reports the connection as broken even though caching works.
+
+    Zone Resources: Include · Specific zone · this domain.
+    Leave Client IP Filtering and TTL empty → Continue to summary →
+    Create Token → copy it NOW; Cloudflare shows it once. If I am editing an
+    existing token instead of making a new one, the value cannot be shown
+    again and I have to use Roll to get a fresh one.
+
+D3. Admin → Speed → Cloudflare → paste Zone ID and API token → Save →
+    Apply. The panel should say "Cloudflare is now caching this site's pages"
+    and "Connected to <domain>".
+
+D4. YOU VERIFY IT, and you check the exclusions before you celebrate the
+    speed. Getting the exclusions wrong is the one way this change can
+    actually harm the site — a cached admin page served to a stranger.
+
+    Use GET, not HEAD. `curl -I` sends HEAD, and the cache rule matches
+    `http.request.method eq "GET"`, so a HEAD probe reports DYNAMIC on a URL
+    that really is cached and you will chase a problem that does not exist:
+        curl -s -o /dev/null -D - "https://<domain>/" | grep -i cf-cache-status
+
+    Must become HIT (first call may be MISS while it fills):
+        /                       and a /_next/image?... URL from the page
+
+    Must stay DYNAMIC or BYPASS — check every one:
+        /admin        /admin/login      /api/settings     /preview/post/1
+        /?s=test      (any query string)
+        /             sent with  -H 'Cookie: __Secure-authjs.session-token=x'
+        /             sent with  -H 'RSC: 1'
+
+    The session-cookie one matters most: a logged-in request must never read
+    from or write to the edge cache. If any of those return HIT, stop and tell
+    me immediately.
+
+D5. Tell me the before/after TTFB so I can see what it bought.
+
+
+HOW TO WORK WITH ME
+-------------------
+
+- One step at a time. Wait for "done" or a screenshot before the next.
+- When you want me to type or paste something, give the literal text in a
+  code block. Never describe a value in words where I might paste the words.
+- Tell me which browser tab / which panel section every instruction is in.
+- If something looks different from what you expect, ask for a screenshot
+  rather than guessing.
+- Logins are slow on this kind of host (bcrypt runs twice plus database round
+  trips, ~1–2s each) and the first visit after idle is slower still; that is
+  expected and C3 is the fix for the idle part. Do not chase it as a bug.
+- Never run "next build" in my development project folder while its dev
+  server is running; this site's work happens in its own folder.
+
+
+LAST TIME, IN ORDER, WHAT ACTUALLY WENT WRONG
+----------------------------------------------
+
+1. I pasted the description of a value instead of the value (see B5).
+2. 503 with nothing in any log — fixed by server.js writing startup.log.
+3. EACCES on .next/static — Windows zip without permissions; fixed by
+   npm run pack and by server.js repairing permissions on start.
+4. A one-off 500 on the dashboard right after login — the sleeping database
+   waking up; C3 prevents it.
+5. Physical Memory Usage crept to 100% hours after everything looked fine.
+   Cause: during troubleshooting I had the owner run `node server.js` by hand
+   in cPanel Terminal to see a raw error, then told them to Ctrl+C it —  but
+   the process kept running anyway (a closed tab, not the Ctrl+C, is usually
+   why) and sat there for over half an hour, a second full copy of the app
+   alongside the one Passenger/LiteSpeed already runs. Whenever a manual
+   `node server.js` was run in Terminal for debugging, verify afterward with
+     ps -u $(whoami) -o pid,rss,etime,cmd | grep node
+   Anything printed as plain `node server.js` (not prefixed `lsnode:`) is an
+   orphan — `kill <pid>` it. The `lsnode:` entries are the real, managed app
+   and must be left alone. B5's NODE_OPTIONS/MALLOC_ARENA_MAX reduce how bad
+   a real leak can get, but they do not free an orphaned process.
+6. Separately, Physical Memory Usage crept back up days later even with no
+   orphaned `node server.js` process anywhere — this time the count of
+   legitimate `lsnode:` entries itself had grown from 2 to 3 over about half
+   an hour, each holding ~200MB. LiteSpeed's own Node manager spawns more
+   worker processes over time and does not reliably reap idle ones — this is
+   documented LiteSpeed/lsnode behaviour, not a bug in this app, and there is
+   no per-app "max workers" setting exposed anywhere in cPanel's Node.js
+   Selector to stop it (an LSAPI_CHILDREN env var exists for PHP apps but is
+   not respected by Node/lsnode — tried it, confirmed no effect).
+
+   A pkill cron clears every `lsnode:` process on the account and LiteSpeed
+   spins a fresh one back up on the next request, so it does work — but see
+   item 7 for what it costs when run often, and C6 for when it is actually
+   justified. The order is: edge caching first (Part D), then measure for
+   days, and only then a once-or-twice-daily pkill if memory really is still
+   climbing. If it climbs even then, that is no longer fixable from this side
+   — the account's resource cap does not fit however many sites are on it, and
+   that is a conversation with the host.
+
+   >>> READ ITEM 7 BEFORE ACTING ON ITEM 6. The every-5-minutes version of
+   >>> that cron caused a far worse problem than the one it solved.
+
+7. The pkill cron from the old C6 ran every five minutes for months and was
+   the real cause of "the site is often down — a visitor opens it, it works,
+   then later it is off again". It took a long time to find because every
+   symptom pointed somewhere else:
+
+     - startup.log showed only clean starts. SIGTERM is a polite kill, so the
+       process exits normally and logs nothing about why.
+     - stderr.log had no heap errors, ruling out the memory theory.
+     - There was no crash and no stack trace anywhere.
+     - It kept restarting even with a keep-alive cron hitting it every three
+       minutes, which ruled out an idle timeout too.
+
+   44 restarts in 4.6 hours, a median gap of 6.3 minutes. The thing that
+   finally identified it was reading the cron list — nothing in any log ever
+   named it.
+
+   Order that works for diagnosing "my site keeps going down":
+     a. startup.log  — clean starts with no exception means something is
+        killing it from outside, not a crash.
+     b. stderr.log   — heap errors would mean memory; their absence rules it out.
+     c. THE CRON LIST — before blaming the host or opening a ticket.
+     d. Only then consider idle timeouts and resource caps.
+
+   The permanent fix was Part D: cache at the edge so the origin stops doing
+   the work that caused the CPU spike that the pkill cron was papering over.
+   With D in place the pkill cron was deleted and restarts went from one every
+   six minutes to none in forty-plus minutes.
+
+8. The site icon was set in the admin and still did not appear, anywhere,
+   including in Google results. `/favicon.ico` is a route that reads the icon
+   from the database — but it had no `export const dynamic = "force-dynamic"`,
+   so Next prerendered it AT BUILD TIME and the host served that frozen file
+   forever. The bytes came from whatever database the build machine talked to,
+   which on a developer PC is the dev database, where no icon is set. Fixed in
+   1.9.51. The general lesson: any route that reads site settings must be
+   dynamic, or it ships a snapshot of the build machine's database. Check the
+   build output for routes marked ○ (Static) that should be ƒ (Dynamic).

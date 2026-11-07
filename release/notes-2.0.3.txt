@@ -1,0 +1,4 @@
+Public pages are made by Astro: about half the size, same look and SEO tags (off switch: BMS_ASTRO=off)
+Sitemap lists each page's featured or share image
+RankLocal removed
+Needs Run NPM Install (new packages)
