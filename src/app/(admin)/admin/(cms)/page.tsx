@@ -9,6 +9,7 @@ import Header from "@/components/admin/Header";
 import Link from "next/link";
 import { FileText, File, Tag, Image, Plus } from "lucide-react";
 import PurgeCacheButton from "@/components/admin/PurgeCacheButton";
+import { PromoBanner } from "@/components/admin/Promo";
 
 async function getStats() {
   // Fired together, not one after another — each Neon round trip costs ~140ms,
@@ -66,6 +67,7 @@ export default async function DashboardPage() {
     <>
       <Header title="Dashboard" />
       <main className="flex-1 p-6">
+        <PromoBanner />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {statCards.map((stat) => (
             <Link key={stat.label} href={stat.href} className="card p-5 hover:shadow-md transition-shadow">

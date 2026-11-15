@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { PromoSidebarLink } from "@/components/admin/Promo";
 import {
   LayoutDashboard,
   FileText,
@@ -220,6 +221,7 @@ export default function Sidebar({ role, userId }: { role?: string; userId?: stri
       </nav>
 
       <div className="px-3 py-4 border-t border-slate-800 space-y-1">
+        <PromoSidebarLink />
         <a
           href="https://whatsapp.com/channel/0029VabLVkeDeONB6gNs6U1h"
           target="_blank"
